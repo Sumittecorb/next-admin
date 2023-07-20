@@ -35,10 +35,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
         {/* <!-- Font Awesome Icons --> */}
-        <script
+        <Script
           src="https://kit.fontawesome.com/42d5adcbca.js"
           crossOrigin="anonymous"
-        ></script>
+        ></Script>
         {/* <!-- Nucleo Icons --> */}
         <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -50,7 +50,6 @@ export default function RootLayout({
       </head>
       {/* <body className={inter.className}>{children}</body> */}
       <body className="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-       
         {/* <SidenavBar /> */}
         {children}
       </body>
