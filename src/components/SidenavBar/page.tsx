@@ -9,7 +9,6 @@ const SidenavBar = () => {
       <div className="h-19">
         <i
           className="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
-          sidenav-close
         ></i>
         <a
           className="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700"
@@ -52,7 +51,7 @@ const SidenavBar = () => {
 
           <li className="mt-0.5 w-full">
             <Link
-              className="py-2.7  dark:text-white dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+              className="bg-blue-500/13 dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
               href="/users"
             >
               <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
