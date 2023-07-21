@@ -3,7 +3,6 @@ import Image from "next/image";
 const Home = () => {
   return (
     <>
-
       <main className="mt-0 transition-all duration-200 ease-in-out">
         <section>
           <div className="relative flex items-center min-h-screen p-0 overflow-hidden bg-center bg-cover">

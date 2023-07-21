@@ -11,7 +11,7 @@ const Home = () => {
           <div className="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
             <nav>
               {/* <!-- breadcrumb --> */}
-              <ol className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+              <ul className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
                 <li className="text-sm leading-normal">
                   <a className="text-white opacity-50" href="javascript:;">
                     Pages
@@ -23,7 +23,7 @@ const Home = () => {
                 >
                   Dashboard
                 </li>
-              </ol>
+              </ul>
               <h6 className="mb-0 font-bold text-white capitalize">
                 Dashboard
               </h6>
@@ -48,7 +48,7 @@ const Home = () => {
                 <a
                   className="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent"
                   target="_blank"
-                  href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053"
+                  href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp_ga=2.76518741.1192788655.1647724933-1242940210.1644448053"
                 >
                   Online Builder
                 </a>
