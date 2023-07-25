@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
         // const role = await User.findOne({ user.isAdmin })
 
-        if (user.isAdmin === false) {
+        if (user.isAdmin === true) {
             return NextResponse.json({ error: "User Does not Exist" }, { status: 400 })
         }
 
