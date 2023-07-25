@@ -1,6 +1,24 @@
-import Image from "next/image";
+"use client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Home = () => {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  })
+
+  const router = useRouter()
+  const onLogin = async () => {
+    try {
+      const response = await axios.post("/api/user/login", user)
+      console.log(response.data, "login succesfully");
+      router.push("/dashboard")
+    } catch (error: any) {
+      console.log(error.message, "error")
+    }
+  }
   return (
     <>
       <main className="mt-0 transition-all duration-200 ease-in-out">
@@ -21,6 +39,8 @@ const Home = () => {
                         <div className="mb-4">
                           <input
                             type="email"
+                            value={user.email}
+                            onChange={(e) => setUser({ ...user, email: e.target.value })}
                             placeholder="Email"
                             className="focus:shadow-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding p-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"
                           />
@@ -29,6 +49,8 @@ const Home = () => {
                           <input
                             type="password"
                             placeholder="Password"
+                            value={user.password}
+                            onChange={(e) => setUser({ ...user, password: e.target.value })}
                             className="focus:shadow-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding p-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"
                           />
                         </div>
@@ -47,6 +69,7 @@ const Home = () => {
                         </div>
                         <div className="text-center">
                           <button
+                            onClick={onLogin}
                             type="button"
                             className="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-500 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25"
                           >
