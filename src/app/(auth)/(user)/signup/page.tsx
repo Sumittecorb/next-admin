@@ -3,13 +3,15 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { errorToastify } from "@/components/common";
+import { ToastContainer } from "react-toastify";
 
 export default function SignupPage() {
     const router = useRouter();
     const [user, setUser] = useState({
         email: "",
         password: "",
-        isAdmin: true,
+        isAdmin: false,
     })
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
@@ -32,6 +34,7 @@ export default function SignupPage() {
 
         } catch (error: any) {
             console.log("signUp failed", error.message);
+            errorToastify(error?.response?.data.error)
         } finally {
             setIsLoading(false)
         }
@@ -39,9 +42,8 @@ export default function SignupPage() {
 
     return (
         <>
-            <h1 className="mt-4 text-center">Admin Panel</h1>
             <div className="flex flex-col items-center justify-center min-h-screen py-2">
-                <h3>{isLoading ? "Processing" : "Signup"}</h3>
+                <h3> User Signup</h3>
                 <hr />
                 <label htmlFor="email">email</label>
                 <input
@@ -68,8 +70,9 @@ export default function SignupPage() {
                     {buttonDisabled ? "No signup" :
                         "Signup"}
                 </button>
-                <Link href="/">Visit login page</Link>
+                <Link href="/login">Visit login page</Link>
             </div>
+            <ToastContainer />
         </>
 
     )

@@ -1,12 +1,16 @@
 "use client";
+import { errorToastify } from "@/components/common";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    isAdmin: true
   })
 
   const router = useRouter()
@@ -17,6 +21,7 @@ const Home = () => {
       router.push("/dashboard")
     } catch (error: any) {
       console.log(error.message, "error")
+      errorToastify(error?.response?.data.error)
     }
   }
   return (
@@ -29,12 +34,14 @@ const Home = () => {
                 <div className="flex flex-col w-full max-w-full px-3 mx-auto lg:mx-0 shrink-0 md:flex-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
                   <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none lg:py4 dark:bg-gray-950 rounded-2xl bg-clip-border">
                     <div className="p-6 pb-0 mb-0">
-                      <h4 className="font-bold">Sign In</h4>
+                      <h1 className=" text-purple-900 underline text-center">Admin Panel</h1>
+                      <h4 className="font-bold mt-14">Sign In</h4>
                       <p className="mb-0">
                         Enter your email and password to sign in
                       </p>
                     </div>
                     <div className="flex-auto p-6">
+
                       <form role="form">
                         <div className="mb-4">
                           <input
@@ -54,19 +61,6 @@ const Home = () => {
                             className="focus:shadow-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding p-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"
                           />
                         </div>
-                        <div className="flex items-center pl-12 mb-0.5 text-left min-h-6">
-                          <input
-                            id="rememberMe"
-                            className="mt-0.5 rounded-10 duration-250 ease-in-out after:rounded-circle after:shadow-2xl after:duration-250 checked:after:translate-x-5.3 h-5 relative float-left -ml-12 w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-zinc-700/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-blue-500/95 checked:bg-blue-500/95 checked:bg-none checked:bg-right"
-                            type="checkbox"
-                          />
-                          <label
-                            className="ml-2 font-normal cursor-pointer select-none text-sm text-slate-700"
-                            htmlFor="rememberMe"
-                          >
-                            Remember me
-                          </label>
-                        </div>
                         <div className="text-center">
                           <button
                             onClick={onLogin}
@@ -79,15 +73,14 @@ const Home = () => {
                       </form>
                     </div>
                     <div className="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
-                      <p className="mx-auto mb-6 leading-normal text-sm">
-                        Don't have an account?{" "}
-                        <a
-                          href="../pages/sign-up.html"
-                          className="font-semibold text-transparent bg-clip-text bg-gradient-to-tl from-blue-500 to-violet-500"
-                        >
-                          Sign up
-                        </a>
-                      </p>
+                      <Link href="/login">
+                        <p className="mx-auto mb-6 leading-normal text-sm cursor-pointer">
+                          Login as a User{" "}
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                          </svg>
+                        </p>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -107,6 +100,7 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <ToastContainer />
       </main>
     </>
   );
