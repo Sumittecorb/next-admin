@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
             message: "Login Succesfully",
             success: true
         })
-        response.cookies.set("token", token, {
+        response.cookies.set("userToken", token, {
             httpOnly: true,
             path: "/"
         })

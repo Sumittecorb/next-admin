@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { connect } from "@/dbconfig/dbConfig";
- 
+
 connect()
 export async function POST(request: NextRequest) {
     try {
@@ -52,6 +52,8 @@ export async function POST(request: NextRequest) {
             httpOnly: true,
             path: "/"
         })
+        response.cookies.set("userToken", "",
+            { httpOnly: true, expires: new Date(0) })
         return response
     }
     catch (error: any) {
