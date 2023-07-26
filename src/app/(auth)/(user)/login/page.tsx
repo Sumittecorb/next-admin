@@ -15,7 +15,7 @@ const Login = () => {
     const router = useRouter()
     const onLogin = async () => {
         try {
-            const response = await axios.post("/api/user/userLogin", user)
+            const response = await axios.post("/api/v1/user/userLogin", user)
             console.log(response.data, "login succesfully");
             router.push("/profile")
             console.log(response, "response");
