@@ -11,7 +11,7 @@ const Home = () => {
   const handleLogout = async (e: any) => {
     e.preventDefault()
     try {
-      await axios.get("/api/user/logout")
+      await axios.get("/api/v1/admin/logout")
       router.push("/")
     }
     catch (error: any) {
