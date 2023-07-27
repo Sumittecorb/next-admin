@@ -1,18 +1,17 @@
 import { NextResponse, NextRequest } from "next/server";
 import User from "@/models/userModels";
 import { connect } from "@/dbconfig/dbConfig";
-import bcryptjs from "bcryptjs"
 
 connect()
 
-export async function GET(request: any) {
+export async function GET(request: NextRequest) {
     try {
         const userList = await User.find()
         if (userList.length == 0) {
             return NextResponse.json({ error: "No Data Found" }, { status: 404 })
         }
-        else{
-            return NextResponse.json({userList})
+        else {
+            return NextResponse.json({ userList })
         }
 
     }
