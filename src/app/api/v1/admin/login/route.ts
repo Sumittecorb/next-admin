@@ -1,5 +1,5 @@
 
-import User from "@/models/userModels"
+import Admin from "@/models/adminModels";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
         console.log(reqBody);
 
         //check if user exist
-        const user = await User.findOne({ email })
+        const user = await Admin.findOne({ email })
         if (!user) {
             return NextResponse.json({ error: "User does not exist" }, { status: 400 })
         }
