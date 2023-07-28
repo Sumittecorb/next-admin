@@ -5,11 +5,12 @@
 </p>
 <br/>
 
-
 ### FrameWork
+
 [Next.js](https://nextjs.org/) – React framework for building performant apps with the best developer experience.
 
 ### UI
+
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development
 
 ### Hooks and Utilities
@@ -20,7 +21,9 @@
 
 - [`bcryptjs`](https://www.npmjs.com/package/bcryptjs) – enables storing passwords as hashed passwords instead of plaintext.
 
+- [react-toastify](https://www.npmjs.com/package/react-toastify) - React-Toastify allows you to add notifications to your app with ease
 
 ### Code Quality
 
 - [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end typesafety
+- [ESLint](https://eslint.org/) – Pluggable linter for Next.js and TypeScript

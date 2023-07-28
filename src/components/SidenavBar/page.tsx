@@ -1,6 +1,11 @@
+"use client"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const SidenavBar = () => {
+
+  const pathName = usePathname()
+
   return (
     <aside
       className="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
@@ -37,13 +42,13 @@ const SidenavBar = () => {
         <ul className="flex flex-col pl-0 mb-0">
           <li className="mt-0.5 w-full">
             <Link
-              className="py-2.7  dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors"
+              className="py-2.7  dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold transition-colors"
               href="/dashboard"
             >
               <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i className="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
               </div>
-              <span className="ml-1 duration-300 opacity-100 pointer-events-none ease">
+              <span className={`ml-1 duration-300 opacity-100 pointer-events-none ease ${pathName == "/dashboard" && "font-bold"}`}>
                 Dashboard
               </span>
             </Link>
@@ -51,19 +56,19 @@ const SidenavBar = () => {
 
           <li className="mt-0.5 w-full">
             <Link
-              className="bg-blue-500/13 dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+              className="py-2.7 dark:text-white dark:opacity-8 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
               href="/users"
             >
               <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i className="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
-              <span className="ml-1 duration-300 opacity-100 pointer-events-none ease">
+              <span className={`ml-1 duration-300 opacity-100 pointer-events-none ease ${pathName == "/users" && "font-bold"}`}>
                 users
               </span>
             </Link>
           </li>
 
-       
+
         </ul>
       </div>
 
