@@ -3,12 +3,13 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   mode: "jit",
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  presets: [],
+  purge: {
+    content: [
+      // Your content paths...
+      "./src/app/**/*.{js,ts,jsx,tsx}",
+      "./src/components/**/*.{js,ts,jsx,tsx}",
+    ],
+  },
   darkMode: "class",
   theme: {
     screens: {
