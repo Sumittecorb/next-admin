@@ -6,7 +6,6 @@ const Home = () => {
       <main className="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
         {/* <!-- Navbar --> */}
 
-
         <div className="w-full px-6 py-6 mx-auto">
           {/* <!-- row 1 --> */}
           <div className="flex flex-wrap -mx-3">
@@ -40,7 +39,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             {/* <!-- card2 --> */}
             <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
               <div className="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
@@ -71,7 +69,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             {/* <!-- card3 --> */}
             <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
               <div className="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
@@ -102,7 +99,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             {/* <!-- card4 --> */}
             <div className="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
               <div className="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
