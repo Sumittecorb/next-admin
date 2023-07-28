@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
         // const role = await User.findOne({ user.isAdmin })
 
-        if (user.isAdmin === false) {
+        if (user.isAdmin === true) {
             return NextResponse.json({ error: "User Does not Exist" }, { status: 400 })
         }
 
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
             message: "Login Succesfully",
             success: true
         })
-        response.cookies.set("token", token, {
+        response.cookies.set("userToken", token, {
             httpOnly: true,
             path: "/"
         })
