@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
           rel="apple-touch-icon"
@@ -43,10 +43,10 @@ export default function RootLayout({
         <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
         {/* <!-- Main Styling --> */}
-        <link
+        {/* <link
           href="../assets/css/argon-dashboard-tailwind.css?v=1.0.1"
           rel="stylesheet"
-        />
+        /> */}
       </head>
       {/* <body className={inter.className}>{children}</body> */}
       <body className="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
@@ -54,14 +54,14 @@ export default function RootLayout({
         {children}
       </body>
 
-      <Script
+      {/* <Script
         src="../assets/js/plugins/perfect-scrollbar.min.js"
         async
-      ></Script>
-      <Script
+      ></Script> */}
+      {/* <Script
         src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1"
         async
-      ></Script>
+      ></Script> */}
     </html>
   );
 }
