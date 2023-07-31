@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json()
         const { isAdmin, email, password } = reqBody
 
-        console.log(reqBody);
+        // console.log(reqBody);
         //check user already exist 
         const user = await User.findOne({ email })
         if (user) {
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
         })
 
         const savedUser = await newUser.save()
-        console.log(savedUser);
+        // console.log(savedUser);
 
         return NextResponse.json({
             message: "user created Successfully",
@@ -41,4 +41,3 @@ export async function POST(request: NextRequest) {
             { status: 500 }
     }
 }
-
