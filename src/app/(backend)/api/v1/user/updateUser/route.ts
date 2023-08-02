@@ -1,8 +1,6 @@
+import { User } from "@/dbconfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
-import connectMongo from "@/dbconfig/dbConfig";
-import User from "@/models/userModels";
 
-connectMongo()
 export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json()
