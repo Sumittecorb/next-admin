@@ -1,8 +1,9 @@
-import connectMongo from "@/dbconfig/dbConfig";
-import User from "@/models/userModels";
+
+// import {User} from "";
+import { User } from "@/dbconfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 
-connectMongo()
+// connectMongo()
 
 export async function POST(request: NextRequest) {
     try {

@@ -3,10 +3,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
-import connectMongo from "@/dbconfig/dbConfig";
-var User = require("@/models/userModels")
+import { User } from "@/dbconfig/dbConfig";
 
-connectMongo()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()

@@ -1,12 +1,9 @@
 
-// import Admin from "@/models/adminModels";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
-import connectMongo from "@/dbconfig/dbConfig";
+import {Admin} from "@/dbconfig/dbConfig";
 
-var Admin = require("@/models/adminModels")
-connectMongo()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
