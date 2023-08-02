@@ -25,7 +25,8 @@ const adminSchema = new mongoose.Schema({
     verifyTokenExpiry: Date
 })
 
-const Admin = mongoose.model.admin || mongoose.model
-    ("admin", adminSchema)
+// const Admin = mongoose.model.admin || mongoose.model
+//     ("admin", adminSchema)
+module.exports = mongoose.model('admin', adminSchema); 
 
-export default Admin
+// export default Admin

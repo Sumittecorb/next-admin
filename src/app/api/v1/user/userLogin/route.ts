@@ -1,11 +1,12 @@
 
-import User from "@/models/userModels"
+// import User from "@/models/userModels"
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { connect } from "@/dbconfig/dbConfig";
- 
-connect()
+import connectMongo from "@/dbconfig/dbConfig";
+var User = require("@/models/userModels")
+
+connectMongo()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()

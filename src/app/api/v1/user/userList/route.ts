@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import User from "@/models/userModels";
-import { connect } from "@/dbconfig/dbConfig";
+import connectMongo from "@/dbconfig/dbConfig";
 
-connect();
+connectMongo();
 
 export async function GET(request: NextRequest) {
   try {
