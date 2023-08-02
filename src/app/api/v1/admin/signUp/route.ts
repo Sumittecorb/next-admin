@@ -1,10 +1,10 @@
-import { connect } from "@/dbconfig/dbConfig";
+import connectMongo from "@/dbconfig/dbConfig";
 // import User from "@/models/userModels"
 import Admin from "@/models/adminModels"
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 
-connect()
+connectMongo()
 
 export async function POST(request: NextRequest) {
     try {
