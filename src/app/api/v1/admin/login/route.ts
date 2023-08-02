@@ -1,11 +1,12 @@
 
-import Admin from "@/models/adminModels";
+// import Admin from "@/models/adminModels";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { connect } from "@/dbconfig/dbConfig";
+import connectMongo from "@/dbconfig/dbConfig";
 
-connect()
+var Admin = require("@/models/adminModels")
+connectMongo()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
@@ -17,8 +18,6 @@ export async function POST(request: NextRequest) {
         if (!user) {
             return NextResponse.json({ error: "User does not exist" }, { status: 400 })
         }
-
-        console.log("user exist")
 
         //check password is correct
         const validPassword = await bcryptjs.compare
