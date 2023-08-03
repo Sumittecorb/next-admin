@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const User = () => {
@@ -12,12 +13,17 @@ const User = () => {
   const userList = async () => {
     try {
       const res = await axios.get("/api/v1/user/userList")
-      console.log(res, "res");
       setIsUser(res?.data?.userList)
     }
     catch (err: any) {
       console.log(err.message, "error");
     }
+  }
+  const router = useRouter()
+
+  const handleEdit = (_id: number) => {
+    console.log(_id);
+    router.push(`/editUser?&_id=${_id}`)
   }
 
   return (
@@ -87,17 +93,15 @@ const User = () => {
                               </td>
                               <td className="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                 <a
-                                  href="javascript:;"
-                                  className="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
+                                  onClick={() => { handleEdit(data?._id) }}
+                                  className="cursor-pointer text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400"
                                 >
-                                  {" "}
-                                  Edit{" "}
+                                  Edit
                                 </a>
                               </td>
                             </tr>
                           )
-                        })
-                        }
+                        })}
                       </tbody>
                     </table>
                   </div>

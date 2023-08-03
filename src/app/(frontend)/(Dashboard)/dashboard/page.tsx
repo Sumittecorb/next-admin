@@ -5,7 +5,6 @@ const Home = () => {
     <>
       <main className="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
         {/* <!-- Navbar --> */}
-
         <div className="w-full px-6 py-6 mx-auto">
           {/* <!-- row 1 --> */}
           <div className="flex flex-wrap -mx-3">
