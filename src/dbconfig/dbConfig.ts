@@ -1,23 +1,23 @@
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 
-// export async function connect() {
+export async function connect() {
 
-//     try {
-//         mongoose.connect(process.env.MONGO_URL!)
-//         const connection = mongoose.connection
+    try {
+        mongoose.connect(process.env.MONGO_URL!)
+        const connection = mongoose.connection
 
-//         connection.on('connected', () => {
-//             console.log('mongodb connected successfully');
-//         })
-//         connection.on('error', (err) => {
-//             console.log('mongoDB connection error. Please make sure MongoDB is running.' + err)
-//             process.exit()
-//         })
-//     }
-//     catch (error) {
-//         console.log(error, "something gone wrong");
-//     }
-// }
+        connection.on('connected', () => {
+            console.log('mongodb connected successfully');
+        })
+        connection.on('error', (err) => {
+            console.log('mongoDB connection error. Please make sure MongoDB is running.' + err)
+            process.exit()
+        })
+    }
+    catch (error) {
+        console.log(error, "something gone wrong");
+    }
+}
 
 // import mongoose from 'mongoose';
 // const connectMongo = async () => {
@@ -54,77 +54,77 @@
 // });
 
 
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
-const adminSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: [true, "Please Provide a Email"],
-        unique: true
-    },
-    password: {
-        type: String,
-        required: [true, "Please Provide a password"],
-        unique: true
-    },
-    isVerified: {
-        type: Boolean,
-        default: false
-    },
-    isAdmin: {
-        type: Boolean,
-        default: true
-    },
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
-    verifyToken: String,
-    verifyTokenExpiry: Date
-});
-export const Admin = mongoose.models.admin || mongoose.model('admin', adminSchema);
+// const adminSchema = new mongoose.Schema({
+//     email: {
+//         type: String,
+//         required: [true, "Please Provide a Email"],
+//         unique: true
+//     },
+//     password: {
+//         type: String,
+//         required: [true, "Please Provide a password"],
+//         unique: true
+//     },
+//     isVerified: {
+//         type: Boolean,
+//         default: false
+//     },
+//     isAdmin: {
+//         type: Boolean,
+//         default: true
+//     },
+//     forgotPasswordToken: String,
+//     forgotPasswordTokenExpiry: Date,
+//     verifyToken: String,
+//     verifyTokenExpiry: Date
+// });
+// export const Admin = mongoose.models.admin || mongoose.model('admin', adminSchema);
 
 
-const userSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: [true, "Please Provide a Email"],
-        unique: true
-    },
-    password: {
-        type: String,
-        required: [true, "Please Provide a password"],
-        unique: true
-    },
-    isVerified: {
-        type: Boolean,
-        default: false
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
-    name: {
-        type: String
-    },
-    title: {
-        type: String
-    },
-    description: {
-        type: String,
-    },
-    shortDescription: {
-        type: String,
-    },
-    designation: {
-        type: String,
-    },
-    menu: {
-        type: Boolean
-    },
+// const userSchema = new mongoose.Schema({
+//     email: {
+//         type: String,
+//         required: [true, "Please Provide a Email"],
+//         unique: true
+//     },
+//     password: {
+//         type: String,
+//         required: [true, "Please Provide a password"],
+//         unique: true
+//     },
+//     isVerified: {
+//         type: Boolean,
+//         default: false
+//     },
+//     isAdmin: {
+//         type: Boolean,
+//         default: false
+//     },
+//     name: {
+//         type: String
+//     },
+//     title: {
+//         type: String
+//     },
+//     description: {
+//         type: String,
+//     },
+//     shortDescription: {
+//         type: String,
+//     },
+//     designation: {
+//         type: String,
+//     },
+//     menu: {
+//         type: Boolean
+//     },
 
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
-    verifyToken: String,
-    verifyTokenExpiry: Date
-});
+//     forgotPasswordToken: String,
+//     forgotPasswordTokenExpiry: Date,
+//     verifyToken: String,
+//     verifyTokenExpiry: Date
+// });
 
-export const User = mongoose.models.user || mongoose.model('user', userSchema);
+// export const User = mongoose.models.user || mongoose.model('user', userSchema);
