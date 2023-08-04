@@ -2,50 +2,86 @@
 
 import { ProgressDefault } from "@/components/progressBar/page";
 import axios from "axios";
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form"
 
-const EditProfile = () => {
-    const searchParams = useSearchParams()
-    const [userData, setUserData] = useState<any>()
-    const [isUser, setIsUser] = useState({
-        title: userData?.title,
-        email: userData?.email,
-        name: userData?.name,
-        menu: userData?.menu,
-        description: userData?.description,
-        shortDescription: userData?.shortDescription,
-        designation: userData?.designation
-    })
-    const [isDesignation, setIsDesignation] = useState("")
-    const [id, setId] = useState({
-        id: searchParams.get('_id')
-    })
+function EditProfile() {
+
+    type ProfileValue = {
+        title: string,
+        email: string,
+        name: string,
+        menu: boolean,
+        description: string,
+        shortDescription: string,
+        designation: string
+    }
+
+    const searchParams = useSearchParams();
+    const [userData, setUserData] = useState<any>();
+    const { setValue, register, handleSubmit, formState: { errors } } = useForm<ProfileValue>();
+    const [isDesignation, setIsDesignation] = useState("");
+    const [isErr, setIsErr] = useState(false)
 
     useEffect(() => {
-        userList()
-    }, [])
+        userList();
+    }, []);
+
+    const router = useRouter()
+    const isId = searchParams.get('_id')
 
     const userList = async () => {
+        let id = {
+            id: isId
+        }
         try {
-            const res = await axios.post("/api/v1/user/getUser", id)
-            console.log(res, "res");
+            const res = await axios.post("/api/v1/user/getUser", id);
             if (res?.data?.code == 200) {
-                setUserData(res?.data?.data)
+                setUserData(res?.data?.data);
+                setValue("title", res?.data?.data?.title)
+                setValue("email", res?.data?.data?.email)
+                setValue("name", res?.data?.data?.name)
+                setValue("description", res?.data?.data?.description)
+                setValue("shortDescription", res?.data?.data?.shortDescription)
+                setValue("designation", res?.data?.data?.designation)
+                setIsDesignation(res?.data?.data?.designation)
+                setValue("menu", res?.data?.data?.menu)
             }
         }
         catch (err: any) {
             console.log(err.message, "error");
         }
-    }
+    };
 
     const handleChange = (e: any) => {
-        setIsDesignation(e.target.value)
-    }
+        setIsDesignation(e.target.value);
+        setIsErr(false)
+    };
 
-    const handleSubmit=()=>{
-        
-    }
+    const onsubmit = async (data: any) => {
+        if (!isDesignation) {
+            setIsErr(true)
+        }
+        else {
+            let keyData = {
+                id: isId,
+                title: data.title,
+                name: data.name,
+                email: data.email,
+                description: data.description,
+                designation: isDesignation,
+                shortDescription: data.shortDescription,
+                menu: true
+            }
+            try {
+                const response = await axios.put("/api/v1/user/updateUser", keyData)
+                router.push("/users")
+            } catch (error: any) {
+                console.log(error.message, "error")
+            }
+        }
+    };
 
     return (
         <>
@@ -60,12 +96,20 @@ const EditProfile = () => {
                                 <div className="flex px-0 pt-0 pb-2 justify-center w-full">
                                     <div className="p-0 overflow-x-auto">
                                         <ProgressDefault />
-                                        <form onSubmit={handleSubmit} className="w-full max-w-lg">
+                                        <form onSubmit={handleSubmit(onsubmit)} className="w-full max-w-lg">
                                             <div className="w-full mx-1 px-3 mb-6 md:mb-0 mt-5">
                                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                                                     Title
                                                 </label>
-                                                <input onChange={(e) => setIsUser({ ...isUser, title: e.target.value })} value={userData?.title} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" />
+                                                <input
+                                                    type="text"
+                                                    {...register("title", { required: true })}
+                                                    className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.title && "border-red-500"} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                                                    id="title"
+                                                    // id=""
+                                                    name="title"
+                                                />
+                                                {/* <input onChange={(e) => setIsUser({ ...isUser, title: e.target.value })} value={userData?.title} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" /> */}
                                                 {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                                             </div>
                                             <div className="flex flex-wrap mb-6">
@@ -73,14 +117,30 @@ const EditProfile = () => {
                                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                                                         Email Address
                                                     </label>
-                                                    <input onChange={(e) => setIsUser({ ...isUser, email: e.target.value })} value={userData?.email} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" />
+                                                    {/* <input onChange={(e) => setIsUser({ ...isUser, email: e.target.value })} value={userData?.email} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" /> */}
+                                                    <input
+                                                        type="text"
+                                                        {...register("email", { required: true })}
+                                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.email && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                                                        id="email"
+                                                        // id=""
+                                                        name="email"
+                                                    />
                                                     {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                                                 </div>
                                                 <div className="w-full md:w-1/2 px-3">
                                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                                         Full Name
                                                     </label>
-                                                    <input onChange={(e) => setIsUser({ ...isUser, name: e.target.value })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" />
+                                                    {/* <input onChange={(e) => setIsUser({ ...isUser, name: e.target.value })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" /> */}
+                                                    <input
+                                                        type="text"
+                                                        {...register("name", { required: true })}
+                                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.name && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                                                        id="name"
+                                                        // id="name"
+                                                        name="name"
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="flex flex-wrap -mx-3 mb-6">
@@ -88,7 +148,13 @@ const EditProfile = () => {
                                                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-description">
                                                         description
                                                     </label>
-                                                    <textarea onChange={(e) => setIsUser({ ...isUser, description: e.target.value })} value={userData?.description} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-description" placeholder="description" />
+                                                    <textarea
+                                                        // value={userData?.description}
+                                                        {...register("description", { required: true })}
+                                                        name="description"
+                                                        className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.description && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                                                        id="description"
+                                                        placeholder="description" />
                                                     {/* <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
                                                 </div>
                                             </div>
@@ -96,14 +162,23 @@ const EditProfile = () => {
                                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                                                     Short Description
                                                 </label>
-                                                <input onChange={(e) => setIsUser({ ...isUser, shortDescription: e.target.value })} value={userData?.shortDescription} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Short Description" />
+                                                {/* <input onChange={(e) => setIsUser({ ...isUser, shortDescription: e.target.value })} value={userData?.shortDescription} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Short Description" /> */}
+                                                <input
+                                                    type="text"
+                                                    {...register("shortDescription", { required: true })}
+                                                    className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.shortDescription && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                                                    id="shortDescription"
+                                                    // id="name"
+                                                    name="shortDescription"
+                                                />
                                             </div>
                                             <div className="w-full mx-3 mt-8 mb-6 md:w-1/2 px-3">
-                                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                                <label className={`block uppercase  tracking-wide text-gray-700 text-xs font-bold mb-2`}
+                                                    htmlFor="grid-last-name">
                                                     Designation
                                                 </label>
-                                                <div className="relative border border-gray-300 text-gray-800 bg-white shadow-lg">
-                                                    <select onChange={(e) => setIsUser({ ...isUser, designation: e.target.value })} className="appearance-none w-full py-1 px-2 bg-white" name="whatever" id="frm-whatever">
+                                                <div className={`relative border ${isErr && "border-red-500"} border-gray-300 text-gray-800 bg-white shadow-lg`}>
+                                                    <select onChange={(e) => handleChange(e)} className="appearance-none w-full py-1 px-2 bg-white" name="whatever" id="frm-whatever">
                                                         <option value={userData?.designation}>{userData?.designation}&hellip;</option>
                                                         <option value="Self employed">Self employed</option>
                                                         <option value="Freelancer">Freelancer</option>
@@ -123,11 +198,25 @@ const EditProfile = () => {
                                                     </label>
                                                     <div className="inline-flex">
                                                         <div className="flex items-center">
-                                                            <input type="radio" id="true" value="true" name="gender" />
+                                                            <input
+                                                                type="radio"
+                                                                {...register("menu", { required: true })}
+                                                                id="true"
+                                                                name="Menu"
+                                                                value="true"
+                                                            />
+                                                            {/* <input type="radio" id="true" value="true" name="gender" /> */}
                                                             <label className="cursor-pointer ml-3 text-black" htmlFor="true">True</label>
                                                         </div>
                                                         <div className="flex items-center ml-5">
-                                                            <input type="radio" id="false" value="false" name="gender" />
+                                                            <input
+                                                                type="radio"
+                                                                {...register("menu", { required: true })}
+                                                                id="false"
+                                                                name="Menu"
+                                                                value="false"
+                                                            />
+                                                            {/* <input type="radio" id="false" value="false" name="gender" /> */}
                                                             <label className="cursor-pointer ml-3 text-black" htmlFor="false">False</label>
                                                         </div>
                                                     </div>
@@ -148,7 +237,7 @@ const EditProfile = () => {
             </main>
         </>
 
-    )
+    );
 }
 
 export default EditProfile
