@@ -36,7 +36,7 @@ function EditProfile() {
             id: isId
         }
         try {
-            const res = await axios.post("/api/v1/user/getUser", id);
+            const res = await axios.post("/api/v1/user/getUser", id)
             if (res?.data?.code == 200) {
                 setUserData(res?.data?.data);
                 setValue("title", res?.data?.data?.title)
