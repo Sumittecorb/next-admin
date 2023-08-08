@@ -23,16 +23,16 @@ const Category = () => {
         setInputFields(updatedInputFields);
     }
 
-    const handleSubmit =async (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
         console.log(inputFields);
-        const valuesArray = inputFields?.map((field => field.value))
+        const valuesArray = inputFields?.map((field => ({
+            name: field.value
+        })))
         const keyData = {
-            categoryValues:valuesArray
+            categoryValues: valuesArray
         }
-        const res = await axios.put("/api/v1/user/addCategory",keyData)
-        console.log(res,"res");
-        
+        const res = await axios.post("/api/v1/user/addCategory", keyData)
     }
 
     return (
