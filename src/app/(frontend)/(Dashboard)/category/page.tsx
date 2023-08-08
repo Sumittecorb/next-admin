@@ -1,5 +1,5 @@
 "use client";
-
+import axios from "axios";
 import { useState } from "react";
 
 const Category = () => {
@@ -22,12 +22,19 @@ const Category = () => {
         );
         setInputFields(updatedInputFields);
     }
-    
-    const handleSubmit = (e: any) => {
+
+    const handleSubmit =async (e: any) => {
         e.preventDefault()
-        console.log("<<<>>>");
         console.log(inputFields);
+        const valuesArray = inputFields?.map((field => field.value))
+        const keyData = {
+            categoryValues:valuesArray
+        }
+        const res = await axios.put("/api/v1/user/addCategory",keyData)
+        console.log(res,"res");
+        
     }
+
     return (
         <>
             <main className="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
@@ -61,7 +68,6 @@ const Category = () => {
                                     <div>
                                         <button type="submit" className="bg-blue-500 mb-5 hover:bg-blue-700 text-white mt-5 w-20 float-right font-bold py-2 px-4 border border-blue-700 rounded">Done</button>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
