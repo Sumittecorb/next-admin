@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please Provide a Email"],
         unique: true
     },
+    notVerified: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         required: [true, "Please Provide a password"],
@@ -15,6 +19,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    categoryValues: Array,
     isAdmin: {
         type: Boolean,
         default: false
