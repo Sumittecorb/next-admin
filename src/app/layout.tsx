@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SidenavBar from "@/components/SidenavBar/page";
 import Script from "next/script";
+import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,26 +43,11 @@ export default function RootLayout({
         {/* <!-- Nucleo Icons --> */}
         <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
         <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-        {/* <!-- Main Styling --> */}
-        {/* <link
-          href="../assets/css/argon-dashboard-tailwind.css?v=1.0.1"
-          rel="stylesheet"
-        /> */}
       </head>
-      {/* <body className={inter.className}>{children}</body> */}
       <body className="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
         {/* <SidenavBar /> */}
         {children}
       </body>
-
-      {/* <Script
-        src="../assets/js/plugins/perfect-scrollbar.min.js"
-        async
-      ></Script> */}
-      {/* <Script
-        src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1"
-        async
-      ></Script> */}
     </html>
   );
 }
