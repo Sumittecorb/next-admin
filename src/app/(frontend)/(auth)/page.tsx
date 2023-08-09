@@ -17,7 +17,6 @@ const Home = () => {
   const onLogin = async () => {
     try {
       const response = await axios.post("/api/v1/admin/login", user)
-      console.log(response.data, "login succesfully");
       router.push("/dashboard")
     } catch (error: any) {
       console.log(error.message, "error")

@@ -7,7 +7,7 @@ connectMongo()
 export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const { id, menu, name, email, title, description, shortDescription, designation } = reqBody
+        const { id, menu, name, email, title, description, shortDescription, designation, categoryValues } = reqBody
         const obj = {
             email: email,
             name: name,
@@ -15,7 +15,8 @@ export async function PUT(request: NextRequest) {
             menu: menu,
             shortDescription: shortDescription,
             description: description,
-            designation: designation
+            designation: designation,
+            categoryValues: categoryValues
         }
         const updateUser = await User.updateOne({ _id: id }, { $set: obj })
         if (id && updateUser) {

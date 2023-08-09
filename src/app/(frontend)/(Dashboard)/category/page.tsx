@@ -25,7 +25,6 @@ const Category = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        console.log(inputFields);
         const valuesArray = inputFields?.map((field => ({
             name: field.value
         })))

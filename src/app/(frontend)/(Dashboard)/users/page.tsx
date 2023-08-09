@@ -22,7 +22,6 @@ const User = () => {
   const router = useRouter()
 
   const handleEdit = (_id: number) => {
-    console.log(_id);
     router.push(`/editUser?&_id=${_id}`)
   }
 
