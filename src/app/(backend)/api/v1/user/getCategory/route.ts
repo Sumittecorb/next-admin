@@ -1,5 +1,4 @@
 import { NextResponse, NextRequest } from "next/server";
-import connectMongo from "@/dbconfig/dbConfig";
 import Category from "@/app/model/category";
 
 export async function GET(request: NextRequest) {
