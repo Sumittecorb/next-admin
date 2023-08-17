@@ -4,7 +4,6 @@ import Lanaguage from "./language"
 function ProgrammingLanguage() {
 
     interface InputField {
-        [x: string]: string | number | readonly string[] | undefined;
         id: number;
         language: string;
         progress: string;
@@ -37,9 +36,8 @@ function ProgrammingLanguage() {
                             </label>
                             <input
                                 type="text"
-                                value={field.value}
+                                // value={field.value}
                                 onChange={(e) => handleInputChange(index, 'language', e.target.value)}
-
                                 className={`appearance-none w-full block bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                 id={`language_${field.id}`}
                                 name={`language_${field.id}`}
