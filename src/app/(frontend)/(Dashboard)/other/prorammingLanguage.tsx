@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Lanaguage from "./language"
 
-function ProgrammingLanguage({ onLanguagesChange }: { onLanguagesChange: any }) {
+function ProgrammingLanguage({ onInputValueChange }: { onInputValueChange: any }) {
 
     interface InputField {
         id: number;
@@ -15,6 +15,7 @@ function ProgrammingLanguage({ onLanguagesChange }: { onLanguagesChange: any }) 
         const newInputFields = [...inputField];
         newInputFields[index][fieldName] = value;
         setInputField(newInputFields);
+        onInputValueChange(index, value);
     };
 
     const handleAddField = () => {
@@ -22,7 +23,7 @@ function ProgrammingLanguage({ onLanguagesChange }: { onLanguagesChange: any }) 
         if (lastField.language !== '' && lastField.progress !== '') {
             setInputField([...inputField, { id: lastField.id + 1, language: '', progress: '' }]);
         }
-        onLanguagesChange(inputField);
+
     };
 
     return (
@@ -68,7 +69,7 @@ function ProgrammingLanguage({ onLanguagesChange }: { onLanguagesChange: any }) 
                 </div>
             </div>
             <div className="mt-10">
-                <Lanaguage onLanguagesChange={onLanguagesChange}/>
+                <Lanaguage onInputValueChange={onInputValueChange} />
             </div>
         </div>
     )

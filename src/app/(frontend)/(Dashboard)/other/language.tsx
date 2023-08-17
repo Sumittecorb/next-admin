@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Lanaguage({ onLanguagesChange }: { onLanguagesChange: any }) {
+function Lanaguage({ onInputValueChange }: { onInputValueChange: any }) {
 
     interface InputField {
         id: number;
@@ -14,6 +14,7 @@ function Lanaguage({ onLanguagesChange }: { onLanguagesChange: any }) {
         const newInputFields = [...inputField];
         newInputFields[index][fieldName] = value;
         setInputField(newInputFields);
+        onInputValueChange(index, value);
     };
 
     const handleAddField = () => {
@@ -21,7 +22,6 @@ function Lanaguage({ onLanguagesChange }: { onLanguagesChange: any }) {
         if (lastField.language !== '' && lastField.value !== '') {
             setInputField([...inputField, { id: lastField.id + 1, language: '', value: '' }]);
         }
-        onLanguagesChange(inputField);
     };
 
     return (

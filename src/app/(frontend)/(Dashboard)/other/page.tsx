@@ -5,36 +5,38 @@ import ProgrammingLanguage from "./prorammingLanguage";
 
 const Category = () => {
 
-    const [programmingLanguages, setProgrammingLanguages] = useState([]);
-
+    const [inputValues, setInputValues] = useState<any>([]);
     const [inputFields, setInputFields] = useState([{
         id: 0,
         value: ""
     }])
-
-    const handleProgrammingLanguagesChange = (languages:any) => {
-        setProgrammingLanguages(languages);
-    };
 
     const handleInputChange = (index: number, value: string) => {
         setInputFields(prevInputFields => {
             const newInputFields = [...prevInputFields];
             newInputFields[index].value = value;
             return newInputFields;
-        });
-    };
+        })
+    }
+
+    const handleInputValueChange = (index: any, value: string) => {
+        const newInputValues = [...inputValues]
+        newInputValues[index] = value
+        setInputValues(newInputValues)
+    }
 
     const handleAdd = () => {
         const lastInputField = inputFields[inputFields.length - 1];
         if (lastInputField.value === "") {
-            return;
+            return
         }
         setInputFields(prevInputFields => [...prevInputFields, { id: prevInputFields.length, value: "" }]);
-    };
+    }
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        console.log("Programming Languages:", programmingLanguages);
+        console.log("Input Values:", inputValues);
+        // console.log("Programming Languages:", programmingLanguages);
     }
 
     return (
@@ -50,7 +52,7 @@ const Category = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-2 gap-32 mt-10 px-10">
                                         <div>
-                                            <ProgrammingLanguage onLanguagesChange={handleProgrammingLanguagesChange} />
+                                            <ProgrammingLanguage onInputValueChange={handleInputValueChange} />
                                         </div>
                                         <div>
                                             <h3>Add Category</h3>
