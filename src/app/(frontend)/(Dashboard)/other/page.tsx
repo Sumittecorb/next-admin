@@ -65,7 +65,6 @@ const Category = () => {
                                             <div className="text-center ">
                                                 <button type="button" onClick={handleAdd} className="bg-black mt-4 hover:bg-gray-600-700 text-white mb-5 content-center w-20 m-auto font-bold py-2 px-4 border border-white-700 rounded">+</button>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div className="ml-10 mb-10">
@@ -76,7 +75,7 @@ const Category = () => {
                         </div>
                     </div>
                 </div>
-            </main >
+            </main>
         </>
     )
 }
