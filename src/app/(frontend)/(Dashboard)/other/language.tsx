@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Lanaguage() {
+function Lanaguage({ onInputValueChange }: { onInputValueChange: any }) {
 
     interface InputField {
         id: number;
@@ -14,6 +14,7 @@ function Lanaguage() {
         const newInputFields = [...inputField];
         newInputFields[index][fieldName] = value;
         setInputField(newInputFields);
+        onInputValueChange(index, value);
     };
 
     const handleAddField = () => {

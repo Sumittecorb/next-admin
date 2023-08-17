@@ -5,6 +5,7 @@ import ProgrammingLanguage from "./prorammingLanguage";
 
 const Category = () => {
 
+    const [inputValues, setInputValues] = useState<any>([]);
     const [inputFields, setInputFields] = useState([{
         id: 0,
         value: ""
@@ -15,19 +16,27 @@ const Category = () => {
             const newInputFields = [...prevInputFields];
             newInputFields[index].value = value;
             return newInputFields;
-        });
-    };
+        })
+    }
+
+    const handleInputValueChange = (index: any, value: string) => {
+        const newInputValues = [...inputValues]
+        newInputValues[index] = value
+        setInputValues(newInputValues)
+    }
 
     const handleAdd = () => {
         const lastInputField = inputFields[inputFields.length - 1];
         if (lastInputField.value === "") {
-            return;
+            return
         }
         setInputFields(prevInputFields => [...prevInputFields, { id: prevInputFields.length, value: "" }]);
-    };
+    }
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
+        console.log("Input Values:", inputValues);
+        // console.log("Programming Languages:", programmingLanguages);
     }
 
     return (
@@ -43,7 +52,7 @@ const Category = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-2 gap-32 mt-10 px-10">
                                         <div>
-                                            <ProgrammingLanguage />
+                                            <ProgrammingLanguage onInputValueChange={handleInputValueChange} />
                                         </div>
                                         <div>
                                             <h3>Add Category</h3>
