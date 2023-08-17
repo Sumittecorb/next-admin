@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Lanaguage from "./language"
 
-function ProgrammingLanguage() {
+function ProgrammingLanguage({ onLanguagesChange }: { onLanguagesChange: any }) {
 
     interface InputField {
         id: number;
@@ -22,6 +22,7 @@ function ProgrammingLanguage() {
         if (lastField.language !== '' && lastField.progress !== '') {
             setInputField([...inputField, { id: lastField.id + 1, language: '', progress: '' }]);
         }
+        onLanguagesChange(inputField);
     };
 
     return (
@@ -67,7 +68,7 @@ function ProgrammingLanguage() {
                 </div>
             </div>
             <div className="mt-10">
-                <Lanaguage />
+                <Lanaguage onLanguagesChange={onLanguagesChange}/>
             </div>
         </div>
     )

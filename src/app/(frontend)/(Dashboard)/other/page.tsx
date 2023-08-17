@@ -5,10 +5,16 @@ import ProgrammingLanguage from "./prorammingLanguage";
 
 const Category = () => {
 
+    const [programmingLanguages, setProgrammingLanguages] = useState([]);
+
     const [inputFields, setInputFields] = useState([{
         id: 0,
         value: ""
     }])
+
+    const handleProgrammingLanguagesChange = (languages:any) => {
+        setProgrammingLanguages(languages);
+    };
 
     const handleInputChange = (index: number, value: string) => {
         setInputFields(prevInputFields => {
@@ -28,6 +34,7 @@ const Category = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
+        console.log("Programming Languages:", programmingLanguages);
     }
 
     return (
@@ -43,7 +50,7 @@ const Category = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-2 gap-32 mt-10 px-10">
                                         <div>
-                                            <ProgrammingLanguage />
+                                            <ProgrammingLanguage onLanguagesChange={handleProgrammingLanguagesChange} />
                                         </div>
                                         <div>
                                             <h3>Add Category</h3>

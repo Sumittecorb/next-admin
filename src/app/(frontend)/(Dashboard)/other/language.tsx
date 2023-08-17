@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Lanaguage() {
+function Lanaguage({ onLanguagesChange }: { onLanguagesChange: any }) {
 
     interface InputField {
         id: number;
@@ -21,6 +21,7 @@ function Lanaguage() {
         if (lastField.language !== '' && lastField.value !== '') {
             setInputField([...inputField, { id: lastField.id + 1, language: '', value: '' }]);
         }
+        onLanguagesChange(inputField);
     };
 
     return (
