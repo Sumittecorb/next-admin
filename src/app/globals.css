@@ -1,3 +1,98 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.ReactModalPortal .ReactModal__Overlay{
+    background-color: rgb(82 77 77 / 48%) !important;
+}
+.resetModal {
+    bottom: auto;
+    margin: auto;
+    height: fit-content;
+    width: 400px;
+    height: fit-content;
+    z-index: 9999;
+    position: absolute;
+    transform: translate(-50%, -30%) !important;
+    left: 50% !important;
+    top: 30% !important;
+    background: #938181;
+    padding: 0;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 18px;
+    opacity: 1;
+  }
+  .resetModal .inner_container {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    text-align: center;
+    padding: 50px 15px 35px;
+    position: relative;
+  }
+  .resetModal .inner_container img {
+    width: 65px;
+    position: absolute;
+    top: -34px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .resetModal .inner_container h3 {
+    text-align: center;
+    font: 600 24px/23px TestSöhneBreit-Halbfett;
+    letter-spacing: 0px;
+    color: #22211F;
+    opacity: 1;
+    margin: 10px auto 0px;
+  }
+  .resetModal .inner_container h6 {
+    text-align: center;
+    font: 399 18px/28px TestSöhneBreit-Halbfett;
+    letter-spacing: 0px;
+    color: #22211F;
+    opacity: 1;
+    margin: 10px auto 24px;
+  }
+  .resetModal .inner_container .cancel_reset {
+    border: 1px solid #ccc;
+  }
+  .resetModal .inner_container .cancel_reset button.cancel_btn {
+    background-color: white;
+    width: 50%;
+    text-align: center;
+    font: 400 16px/21px TestSöhneBreit-Halbfett;
+    letter-spacing: 0px;
+    color: #0e31e5;
+    opacity: 1;
+    margin: 0px auto 0;
+    padding: 10px;
+    border-right: 2px solid #ccc;
+    border-radius: 0px !important;
+  }
+  .resetModal .inner_container .cancel_reset button.reset_btn {
+    background-color: white;
+    width: 50%;
+    text-align: center;
+    font: 400 16px/21px TestSöhneBreit-Halbfett;
+    letter-spacing: 0px;
+    color: #0e31e5;
+    opacity: 1;
+    margin: 0px auto 0;
+    padding: 10px;
+  }
+  .resetModal .phoneCopied input {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px 10px;
+    width: 100%;
+  }
+  .resetModal .phoneCopied button.copied {
+    background-color: #FF8E01;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 10px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+  }
+  
