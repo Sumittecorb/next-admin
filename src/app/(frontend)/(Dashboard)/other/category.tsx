@@ -1,16 +1,26 @@
+import Modal from "@/components/modal/page"
+import { useState } from "react"
+
 function Category() {
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
-        <div className="w-full mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs  mb-2" htmlFor="grid-first-name">
-                category
-            </label>
-            <input
-                type="text"
-                className={`appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
-                id="email"
-                name="email"
-            // onChange={(e) => { handleChange(field.id, e.target.value) }}
-            />
+        <div className="flex items-center justify-between">
+            <div>
+                <ul>
+                    <li>Category 1</li>
+                    <li>Category 2</li>
+                    <li>Category 3</li>
+                    <li>Category 4</li>
+                </ul>
+            </div>
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <div>
+                <button onClick={() => { setIsOpen(true) }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</button>
+            </div>
+
         </div>
+
     )
 }
+export default Category
