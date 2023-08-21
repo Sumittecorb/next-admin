@@ -1,4 +1,4 @@
-import Modal from "@/components/modal/page"
+import Modal from "@/components/modal/categoryModal"
 import { useState } from "react"
 
 function Category() {

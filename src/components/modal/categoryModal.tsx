@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import ReactModal from "react-modal";
 import ClickAwayListener from 'react-click-away-listener';
+import axios from 'axios';
 
 const Modal = ({ isOpen, setIsOpen }: { isOpen: any, setIsOpen: any }) => {
 
@@ -24,10 +25,12 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: any, setIsOpen: any }) => {
         setInputFields(prevInputFields => [...prevInputFields, { id: prevInputFields.length, value: "" }]);
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
         const allValues = inputFields.map(field => field.value);
         console.log(allValues, "allValues");
+        const res = await axios.post("/api/v1/user/addCategory",allValues)
+        console.log(res,"res");
     }
 
     return (
