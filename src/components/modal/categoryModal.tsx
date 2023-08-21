@@ -27,10 +27,23 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: any, setIsOpen: any }) => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        const allValues = inputFields.map(field => field.value);
-        console.log(allValues, "allValues");
-        const res = await axios.post("/api/v1/user/addCategory",allValues)
-        console.log(res,"res");
+        const lastInputField = inputFields[inputFields.length - 1];
+        if (lastInputField.value === "") {
+            return
+        }
+        else {
+            const inputFieldValues = inputFields.map(field => ({
+                name: field.value
+            }))
+            let reqBody = {
+                categoryValues: inputFieldValues
+            };
+            const res = await axios.post("/api/v1/user/addCategory", reqBody)
+            console.log(res, "res");
+            if (res.status == 201) {
+                setIsOpen(false)
+            }
+        }
     }
 
     return (
@@ -74,5 +87,4 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: any, setIsOpen: any }) => {
         </Fragment>
     );
 };
-
 export default Modal;

@@ -16,7 +16,7 @@ function AddCategory({ setIsNext }: { setIsNext: any }) {
     }));
 
     useEffect(() => {
-        categoryList()
+        getCategory()
     }, [])
 
     const handleCategoryChange = (selectedOptions: any) => {
@@ -36,7 +36,7 @@ function AddCategory({ setIsNext }: { setIsNext: any }) {
         }
     }
 
-    const categoryList = async () => {
+    const getCategory = async () => {
         try {
             const res = await axios.get("/api/v1/user/getCategory")
             setIsCategory(res?.data?.categoryList)
