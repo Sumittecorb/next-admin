@@ -13,7 +13,7 @@ function Language() {
                     <li>Language 4</li>
                 </ul>
             </div>
-            <LanguageModal isOpen={isOpen} />
+            <LanguageModal isOpen={isOpen} setIsOpen={setIsOpen} />
             <div>
                 <button onClick={() => { setIsOpen(true) }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</button>
             </div>
