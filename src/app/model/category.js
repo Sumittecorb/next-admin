@@ -6,7 +6,7 @@ const categorySchema = new mongoose.Schema({
         required: [false, "Please Provide Category Name"],
         unique: true
     },
-    lowerName: {
+    lowerName: { 
         type: String,
         default: true
     },
