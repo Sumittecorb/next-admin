@@ -3,13 +3,12 @@ import mongoose from "mongoose";
 const languageSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [false, "Please Provide Language Name"],
+        required: [true, "Please Provide Language Name"],
         unique: true
     },
     value: {
         type: Number,
         required: [false, "Please Provide value"],
-        unique: true 
     },
     lowerName: {
         type: String,
