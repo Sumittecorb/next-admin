@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Fragment, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import ReactModal from "react-modal";
@@ -14,13 +15,17 @@ function ProgrammingModal({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: a
         }
     }
 
-    const handleSubmit = (event: any) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
         const inputFieldValues = languageFields.map(field => ({
-            language: field.language,
+            name: field.language,
             progress: field.progress
         }));
-        console.log("Input Field Values:", inputFieldValues);
+        const keyData = {
+            programminglanguage: inputFieldValues
+        }
+        let res = await axios.post("/api/v1/user/addProgrammingLan",keyData)
+        console.log(res,"res");
     }
 
     return (

@@ -8,7 +8,11 @@ export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
         const { language } = reqBody
+        console.log(reqBody,"reqBody");
+        
         const values = language.length
+        console.log(values,"values");
+        
         for (var i = 0; i < values; i++) {
             const inserName = language[i].name
             const inserValue = language[i].value
