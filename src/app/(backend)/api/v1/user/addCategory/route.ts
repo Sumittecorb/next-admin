@@ -7,16 +7,16 @@ connectMongo()
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const { language } = reqBody
-        const values = language.length
+        const { categoryValues } = reqBody
+        const values = categoryValues.length
         for (var i = 0; i < values; i++) {
-            const inserValue = language[i].name
+            const inserValue = categoryValues[i].name
             const newUser = new Category({
                 name: inserValue
             })
             const savedUser = await newUser.save()
         }
-        return NextResponse.json({ message: "Language Successfully added" }, { status: 201 })
+        return NextResponse.json({ message: "Category added Successfully" }, { status: 201 })
     }
     catch (error: any) {
         return NextResponse.json({ error: error.message })
