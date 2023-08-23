@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fragment } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import ReactModal from "react-modal";
@@ -25,8 +25,8 @@ function LanguageModal({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: any 
         const keyData = {
             language: inputFieldValues
         }
-        let res = await axios.post("/api/v1/user/addLanguage",keyData)
-        console.log(res,"res");
+        let res = await axios.post("/api/v1/user/addLanguage", keyData)
+        console.log(res, "res");
     }
 
     return (

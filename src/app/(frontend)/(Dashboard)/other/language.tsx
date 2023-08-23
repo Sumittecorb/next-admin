@@ -1,16 +1,32 @@
 import LanguageModal from "@/components/modal/languageModal"
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
 function Language() {
     const [isOpen, setIsOpen] = useState(false)
+
+    const [isLanguage, setIsLanguage] = useState([])
+
+    useEffect(() => {
+        languageList()
+    }, [])
+
+    const languageList = async () => {
+        let res = await axios.get("/api/v1/user/getLanguage")
+        if (res?.status == 200) {
+            setIsLanguage(res?.data?.languageList)
+        }
+    }
     return (
         <div className="flex items-center justify-between">
             <div>
                 <ul>
-                    <li>Language 1</li>
-                    <li>Language 2</li>
-                    <li>Language 3</li>
-                    <li>Language 4</li>
+                    {isLanguage?.map((list: any) => {
+                        return (
+                            <li>{list?.name} = {list?.value} %</li> 
+                        )
+                    })
+                    }
                 </ul>
             </div>
             <LanguageModal isOpen={isOpen} setIsOpen={setIsOpen} />
