@@ -24,8 +24,11 @@ function ProgrammingModal({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: a
         const keyData = {
             programminglanguage: inputFieldValues
         }
-        let res = await axios.post("/api/v1/user/addProgrammingLan",keyData)
-        console.log(res,"res");
+        let res = await axios.post("/api/v1/user/addProgrammingLan", keyData)
+        if (res?.status == 200) {
+            setIsOpen(false)
+        }
+        console.log(res, "res");
     }
 
     return (
