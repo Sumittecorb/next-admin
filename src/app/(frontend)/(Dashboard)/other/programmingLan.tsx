@@ -20,7 +20,7 @@ function ProgrammingLan() {
                 <ul>
                     {isProgramming?.map((list: any) => {
                         return (
-                            <li>{list?.name}</li>
+                            <li>{list?.name} = {list.progress}%</li>
                         )
                     })
                     }
