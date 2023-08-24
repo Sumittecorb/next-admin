@@ -23,7 +23,7 @@ function Language() {
                 <ul>
                     {isLanguage?.map((list: any) => {
                         return (
-                            <li>{list?.name} = {list?.value} %</li> 
+                            <li>{list?.name} = {list?.value}%</li> 
                         )
                     })
                     }
