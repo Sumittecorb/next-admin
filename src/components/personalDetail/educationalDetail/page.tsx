@@ -3,7 +3,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 
-const EducationalDetail = () => {
+const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
 
     type ProfileValue = {
         school: string
@@ -161,8 +161,8 @@ const EducationalDetail = () => {
                         </button>
                     </div>
                     <div className=" flex items-center justify-between ml-7 mb-3">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Submit
+                        <button onClick={() => { setIsNext(false) }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Back
                         </button>
                         <button type="button" className={`bg-black text-white font-bold py-2 px-4 rounded`}>
                             Next

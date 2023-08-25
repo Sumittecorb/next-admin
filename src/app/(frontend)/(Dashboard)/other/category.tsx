@@ -11,7 +11,7 @@ function Category() {
     }, [isOpen])
 
     const getCategory = async () => {
-        let res = await axios.get("/api/v1/user/getCategory")
+        let res = await axios.get("/api/v1/user/category")
         if (res?.status == 200) {
             setCategoryList(res?.data?.categoryList)
         }

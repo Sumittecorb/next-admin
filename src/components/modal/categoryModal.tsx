@@ -38,7 +38,7 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: any, setIsOpen: any }) => {
             let reqBody = {
                 categoryValues: inputFieldValues
             };
-            const res = await axios.post("/api/v1/user/addCategory", reqBody)
+            const res = await axios.post("/api/v1/user/category", reqBody)
             console.log(res, "res");
             if (res.status == 201) {
                 setIsOpen(false)

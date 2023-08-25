@@ -71,7 +71,7 @@ function PersonalDetail() {
                     <div className="w-full max-w-lg">
                         {!isNext ?
                             <EmploymentHistory setIsNext={setIsNext} /> :
-                            <EducationalDetail />
+                            <EducationalDetail setIsNext={setIsNext} />
                         }
                     </div>
                 </div>
