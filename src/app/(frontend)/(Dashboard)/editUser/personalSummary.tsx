@@ -1,13 +1,13 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import moment from "moment";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ProgressDefault } from "@/components/progressBar/page";
-import EmploymentHistory from "@/components/personalDetail/employmentHistory/page";
 import EducationalDetail from "@/components/personalDetail/educationalDetail/page";
+import EmploymentHistory from "@/components/personalDetail/employmentHistory/page";
 
 function PersonalDetail() {
-
-    const { register, control, handleSubmit, formState: { errors } } = useForm<ProfileValue>();
     type ProfileValue = {
         title: string;
         email: string;
@@ -17,11 +17,48 @@ function PersonalDetail() {
         endDate: any
     };
 
+    const { register, control, handleSubmit, formState: { errors } } = useForm<ProfileValue>();
+    const [employmentHistory, setEmploymentHistory] = useState<ProfileValue[]>([
+        {
+            title: "",
+            email: "",
+            name: "",
+            description: "",
+            startDate: "",
+            endDate: ""
+        }
+    ]);
+
+    const today = new Date();
+    const [isOpen, setIsOpen] = useState(false)
+    const [date, setDate] = useState("")
+    const [isNext, setIsNext] = useState(false)
+
+
+    const addEmployment = () => {
+        setEmploymentHistory([...employmentHistory, {
+            title: "",
+            email: "",
+            name: "",
+            description: "",
+            startDate: "",
+            endDate: ""
+        }]);
+    }
+
     const onsubmit = (data: ProfileValue) => {
         console.log(errors, "errors");
 
         console.log(data);
     };
+
+    const startChangeDate = (date: any) => {
+        setDate(moment(date).format('MMM YYYY'))
+    }
+
+    const startEndDate = (date: any) => {
+        console.log(date);
+    }
 
     return (
         <div>
@@ -31,15 +68,12 @@ function PersonalDetail() {
             </div>
             <div className="flex px-0 pt-0 pb-2 justify-center w-full">
                 <div className="p-0 overflow-x-auto">
-                    <form onSubmit={handleSubmit(onsubmit)}>
-                        <EmploymentHistory />
-                        <EducationalDetail />
-                        <div className="mt-10 flex items-center justify-between ml-7 mb-3">
-                            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Submit
-                            </button>
-                        </div>
-                    </form>
+                    <div className="w-full max-w-lg">
+                        {!isNext ?
+                            <EmploymentHistory setIsNext={setIsNext} /> :
+                            <EducationalDetail />
+                        }
+                    </div>
                 </div>
             </div>
         </div>
