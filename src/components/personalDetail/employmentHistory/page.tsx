@@ -3,7 +3,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 
-const EmploymentHistory = () => {
+const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
     type ProfileValue = {
         title: string;
         employer: string;
@@ -44,20 +44,20 @@ const EmploymentHistory = () => {
         console.log(date);
     }
 
+    const onsubmit = () => {
+
+    }
+
     return (
         <div className="w-full max-w-lg">
             <div className="mt-10 ">
                 <h5 className="text-blue-DEFAULT-950 underline font-bold">Employment History</h5>
             </div>
-
-            <div>
-                <div className="font-extrabold text-center ">
-                    <button type="button" onClick={() => { setIsOpen(!isOpen) }}>+</button>
-                </div>
-                {isOpen &&
-                    employmentHistory.map((employment, index) => (
+            <form onSubmit={handleSubmit(onsubmit)}>
+                <div>
+                    {employmentHistory.map((employment, index) => (
                         <div key={index}>
-                            <div className="border-4 mt-2">
+                            <div className="border-4 mt-5">
                                 <div className="flex flex-wrap mb-6 mt-5">
                                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
@@ -153,12 +153,21 @@ const EmploymentHistory = () => {
                             </div>
                         </div>
                     ))}
-                {isOpen && <div className="text-center">
-                    <button onClick={addEmployment} type="button"
-                        className="bg-slate-600 mt-4 hover:bg-gray-600-700 text-white mb-5 content-center w-200 m-auto font-bold py-2 px-4 border border-white-700 rounded">+ Add one more employment
-                    </button>
-                </div>}
-            </div>
+                    <div className="text-center">
+                        <button onClick={addEmployment} type="button"
+                            className="bg-slate-600 mt-4 hover:bg-gray-600-700 text-white mb-5 content-center w-200 m-auto font-bold py-2 px-4 border border-white-700 rounded">+ Add one more employment
+                        </button>
+                    </div>
+                    <div className=" flex items-center justify-between ml-7 mb-3">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Submit
+                        </button>
+                        <button onClick={() => { setIsNext(true) }} type="button" className={`bg-black text-white font-bold py-2 px-4 rounded`}>
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     )
 }
