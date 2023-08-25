@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
             })
             const savedUser = await newUser.save()
         }
-        return NextResponse.json({ message: "Category Successfully added" }, { status: 201 })
+        return NextResponse.json({ message: "Category added Successfully" }, { status: 201 })
     }
     catch (error: any) {
         return NextResponse.json({ error: error.message })

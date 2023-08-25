@@ -18,15 +18,19 @@
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "jsonwebtoken": "^9.0.1",
+    "moment": "^2.29.4",
     "mongoose": "^7.4.0",
     "next": "13.4.10",
     "nodemailer": "^6.9.4",
     "nodemon": "^3.0.1",
     "postcss": "8.4.26",
     "react": "18.2.0",
+    "react-click-away-listener": "^2.2.3",
     "react-cookie": "^4.1.1",
+    "react-datepicker": "^4.16.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.2",
+    "react-modal": "^3.16.1",
     "react-select": "^5.7.4",
     "react-toastify": "^9.1.3",
     "tailwindcss": "3.3.3",
@@ -34,6 +38,8 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^9.0.2"
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/react-datepicker": "^4.15.0",
+    "@types/react-modal": "^3.16.0"
   }
 }
