@@ -154,7 +154,7 @@ const EmploymentHistory = () => {
                         </div>
                     ))}
                 {isOpen && <div className="text-center">
-                    <button type="button"
+                    <button onClick={addEmployment} type="button"
                         className="bg-slate-600 mt-4 hover:bg-gray-600-700 text-white mb-5 content-center w-200 m-auto font-bold py-2 px-4 border border-white-700 rounded">+ Add one more employment
                     </button>
                 </div>}
