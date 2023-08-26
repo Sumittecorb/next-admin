@@ -5,17 +5,17 @@ import { Controller, useForm } from "react-hook-form";
 
 const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
     type ProfileValue = {
-        title: string;
-        employer: string;
-        description: string;
-        startDate: any
-        endDate: any
-    };
+        title: string
+        employer: string
+        description: string
+        startDate: string
+        endDate: string
+    }
 
     const { register, control, handleSubmit, formState: { errors } } = useForm<ProfileValue>();
     const today = new Date();
-    const [isOpen, setIsOpen] = useState(false)
     const [date, setDate] = useState("")
+    const [selectedDate, setSelectedDate] = useState<any>('')
     const [employmentHistory, setEmploymentHistory] = useState<ProfileValue[]>([
         {
             title: "",
@@ -25,6 +25,16 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
             endDate: ""
         }
     ]);
+
+    const isEmploymentEntryEmpty = (employment: ProfileValue): boolean => {
+        return (
+            employment.title === "" &&
+            employment.employer === "" &&
+            employment.description === "" &&
+            employment.startDate === "" &&
+            employment.endDate === ""
+        );
+    };
 
     const addEmployment = () => {
         setEmploymentHistory([...employmentHistory, {
@@ -38,15 +48,20 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
 
     const startChangeDate = (date: any) => {
         setDate(moment(date).format('MMM YYYY'))
+        setSelectedDate(date)
     }
 
     const startEndDate = (date: any) => {
         console.log(date);
     }
 
-    const onsubmit = () => {
+    const onsubmit = (data: any) => {
+
+
+        console.log(data, "data");
 
     }
+    console.log(errors);
 
     return (
         <div className="w-full max-w-lg">
@@ -68,7 +83,8 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                             {...register("title", { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.title && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="title"
-                                            name="title" />
+                                            name="title"
+                                        />
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -79,7 +95,8 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                             {...register("employer", { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.employer && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="employer"
-                                            name="employer" />
+                                            name="employer"
+                                        />
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -88,7 +105,7 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                         <div>
                                             <Controller
                                                 control={control}
-                                                name='startDate'
+
                                                 render={({ field }) => (
                                                     <DatePicker
                                                         autoComplete='off'
@@ -99,12 +116,16 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
                                                         className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
-                                                        name="dob"
+                                                        name="startDate"
+                                                        selected={selectedDate}
                                                         onKeyDown={(e) => {
                                                             e.preventDefault();
                                                         }}
                                                     />
                                                 )}
+                                                {...register("startDate", {
+                                                    required: true,
+                                                })}
                                             />
                                         </div>
                                     </div>
@@ -115,7 +136,7 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                         <div>
                                             <Controller
                                                 control={control}
-                                                name='endDate'
+                                                // name='endDate'
                                                 render={({ field }) => (
                                                     <DatePicker
                                                         showMonthYearPicker
@@ -132,6 +153,9 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                                         }}
                                                     />
                                                 )}
+                                                {...register("endDate", {
+                                                    required: true,
+                                                })}
                                             />
                                         </div>
                                     </div>
@@ -154,12 +178,14 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                         </div>
                     ))}
                     <div className="text-center">
-                        <button onClick={addEmployment} type="button"
+                        <button onClick={addEmployment}
+                            type="button"
+                            disabled={isEmploymentEntryEmpty(employmentHistory[employmentHistory.length - 1])}
                             className="bg-slate-600 mt-4 hover:bg-gray-600-700 text-white mb-5 content-center w-200 m-auto font-bold py-2 px-4 border border-white-700 rounded">+ Add one more employment
                         </button>
                     </div>
                     <div className=" flex items-center justify-between ml-7 mb-3">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Submit
                         </button>
                         <button onClick={() => { setIsNext(true) }} type="button" className={`bg-black text-white font-bold py-2 px-4 rounded`}>

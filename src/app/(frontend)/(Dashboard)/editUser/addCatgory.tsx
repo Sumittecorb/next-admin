@@ -26,8 +26,6 @@ function AddCategory({ setIsNext }: { setIsNext: any }) {
     };
 
     const handleAdd = async () => {
-        // console.log(selectedColors, "selectedColors");
-
         try {
             const response = await axios("/api/v1/user/updateUser")
             console.log(response, "response");
@@ -40,7 +38,7 @@ function AddCategory({ setIsNext }: { setIsNext: any }) {
 
     const getCategory = async () => {
         try {
-            const res = await axios.get("/api/v1/user/getCategory")
+            const res = await axios.get("/api/v1/user/category")
             setIsCategory(res?.data?.categoryList)
         }
         catch (err: any) {
@@ -49,10 +47,8 @@ function AddCategory({ setIsNext }: { setIsNext: any }) {
     }
 
     return (
-
         <>
-            {nextBtn ? <PersonalDetail />
-                :
+            {nextBtn ? <PersonalDetail /> :
                 <>
                     <ProgressDefault value={3} />
                     <div className="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
