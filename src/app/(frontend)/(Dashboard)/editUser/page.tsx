@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
 import AddCategory from "./addCatgory";
+import EducationalDetail from "@/components/personalDetail/educationalDetail/page";
 
 function EditProfile() {
     type ProfileValue = {
@@ -242,6 +243,7 @@ function EditProfile() {
                                             </div>
                                         </div>
                                     </div>}
+                                    {/* <EducationalDetail setIsNext={setIsNext}/> */}
                             </div>
                         </div>
                     </div>
