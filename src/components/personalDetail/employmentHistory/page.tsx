@@ -13,9 +13,10 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
         endDate: string
     }
 
-    const { register, control, handleSubmit, formState: { errors } } = useForm<ProfileValue>();
+    const { register, control, handleSubmit, getValues, formState: { errors } } = useForm<ProfileValue>();
     const today = new Date();
-    const [date, setDate] = useState("")
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
     const [selectedDate, setSelectedDate] = useState<any>('')
     const [employmentHistory, setEmploymentHistory] = useState<ProfileValue[]>([
         {
@@ -37,7 +38,30 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
         );
     };
 
+    // const addEmployment = () => {
+    //     setEmploymentHistory([...employmentHistory, {
+    //         title: "",
+    //         employer: "",
+    //         description: "",
+    //         startDate: "",
+    //         endDate: ""
+    //     }]);
+    // }
+
     const addEmployment = () => {
+        const currentValues = getValues();
+        const isCurrentEntryEmpty = (
+            currentValues.title === "" ||
+            currentValues.employer === "" ||
+            currentValues.description === "" ||
+            currentValues.startDate === undefined ||
+            currentValues.endDate === undefined
+        );
+
+        if (isCurrentEntryEmpty) {
+            return;
+        }
+
         setEmploymentHistory([...employmentHistory, {
             title: "",
             employer: "",
@@ -46,23 +70,17 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
             endDate: ""
         }]);
     }
-
     const startChangeDate = (date: any) => {
-        setDate(moment(date).format('MMM YYYY'))
-        setSelectedDate(date)
+        setStartDate(moment(date).format('MMM YYYY'))
     }
 
     const startEndDate = (date: any) => {
-        console.log(date);
+        setEndDate(moment(date).format('MMM YYYY'))
     }
 
     const onsubmit = (data: any) => {
 
-
-        console.log(data, "data");
-
     }
-    console.log(errors);
 
     return (
         <div className="w-full max-w-lg">
@@ -112,13 +130,16 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                                         autoComplete='off'
                                                         showMonthYearPicker
                                                         maxDate={today}
-                                                        onChange={startChangeDate}
-                                                        value={date}
+                                                        onChange={(date) => {
+                                                            startChangeDate(date)
+                                                            field.onChange(date)
+                                                        }}
+                                                        selected={startDate !== "" ? new Date(startDate) : null}
+                                                        value={startDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
                                                         className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
                                                         name="startDate"
-                                                        selected={selectedDate}
                                                         onKeyDown={(e) => {
                                                             e.preventDefault();
                                                         }}
@@ -143,8 +164,12 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                                         showMonthYearPicker
                                                         autoComplete='off'
                                                         maxDate={today}
-                                                        onChange={startEndDate}
-                                                        value={date}
+                                                        onChange={(date) => {
+                                                            startEndDate(date)
+                                                            field.onChange(date)
+                                                        }}
+                                                        selected={endDate !== "" ? new Date(endDate) : null}
+                                                        value={endDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
                                                         className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
@@ -181,7 +206,6 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                     <div className="text-center">
                         <button onClick={addEmployment}
                             type="button"
-                            disabled={isEmploymentEntryEmpty(employmentHistory[employmentHistory.length - 1])}
                             className="bg-slate-600 mt-4 hover:bg-gray-600-700 text-white mb-5 content-center w-200 m-auto font-bold py-2 px-4 border border-white-700 rounded">+ Add one more employment
                         </button>
                     </div>
