@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 
 const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
     type ProfileValue = {
+        id: number
         title: string
         employer: string
         description: string
@@ -13,42 +14,27 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
         endDate: string
     }
 
-    const { register, control, handleSubmit, getValues, formState: { errors } } = useForm<ProfileValue>();
+    const { register, control, handleSubmit, getValues, formState: { errors }, trigger } = useForm<ProfileValue>();
     const today = new Date();
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
-    const [selectedDate, setSelectedDate] = useState<any>('')
     const [employmentHistory, setEmploymentHistory] = useState<ProfileValue[]>([
         {
+            id: 0,
             title: "",
             employer: "",
             description: "",
             startDate: "",
-            endDate: ""
-        }
+            endDate: "",
+        },
     ]);
 
-    const isEmploymentEntryEmpty = (employment: ProfileValue): boolean => {
-        return (
-            employment.title === "" &&
-            employment.employer === "" &&
-            employment.description === "" &&
-            employment.startDate === "" &&
-            employment.endDate === ""
-        );
-    };
+    console.log(employmentHistory, "employmentHistory");
 
-    // const addEmployment = () => {
-    //     setEmploymentHistory([...employmentHistory, {
-    //         title: "",
-    //         employer: "",
-    //         description: "",
-    //         startDate: "",
-    //         endDate: ""
-    //     }]);
-    // }
 
-    const addEmployment = () => {
+    const addEmployment = async () => {
+
+        const newId = employmentHistory.length;
         const currentValues = getValues();
         const isCurrentEntryEmpty = (
             currentValues.title === "" ||
@@ -58,18 +44,26 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
             currentValues.endDate === undefined
         );
 
-        if (isCurrentEntryEmpty) {
-            return;
-        }
+        // if (isCurrentEntryEmpty) {
+        //     return;
+        // }
 
-        setEmploymentHistory([...employmentHistory, {
-            title: "",
-            employer: "",
-            description: "",
-            startDate: "",
-            endDate: ""
-        }]);
+        setEmploymentHistory([
+            ...employmentHistory,
+            {
+                id: newId,
+                title: "",
+                employer: "",
+                description: "",
+                startDate: "",
+                endDate: "",
+            },
+        ]);
+        const isFormValid = await trigger();
+        console.log(isFormValid, "isFormValid");
+
     }
+
     const startChangeDate = (date: any) => {
         setStartDate(moment(date).format('MMM YYYY'))
     }
@@ -79,7 +73,8 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
     }
 
     const onsubmit = (data: any) => {
-
+        console.log(data.employment);
+        setIsNext(true)
     }
 
     return (
@@ -99,10 +94,11 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                         </label>
                                         <input
                                             type="text"
-                                            {...register("title", { required: true })}
+                                            autoComplete='off'
+                                            {...register(`employment[${employment.id}].title`, { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.title && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="title"
-                                            name="title"
+                                            name={`employment[${employment.id}].title`}
                                         />
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
@@ -110,11 +106,12 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                             Employer
                                         </label>
                                         <input
+                                            autoComplete='off'
                                             type="text"
-                                            {...register("employer", { required: true })}
+                                            {...register(`employment[${employment.id}].employer`, { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.employer && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="employer"
-                                            name="employer"
+                                            name={`employment[${employment.id}].employer`}
                                         />
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
@@ -124,28 +121,27 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                         <div>
                                             <Controller
                                                 control={control}
-
                                                 render={({ field }) => (
                                                     <DatePicker
                                                         autoComplete='off'
                                                         showMonthYearPicker
                                                         maxDate={today}
-                                                        onChange={(date) => {
-                                                            startChangeDate(date)
-                                                            field.onChange(date)
+                                                        onChange={(date: any) => {
+                                                            startChangeDate(date);
+                                                            field.onChange(date);
                                                         }}
-                                                        selected={startDate !== "" ? new Date(startDate) : null}
+                                                        selected={employment.startDate !== "" ? new Date(employment.startDate) : null}
                                                         value={startDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
                                                         className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
-                                                        name="startDate"
+                                                        name={`startDate_${index}`}
                                                         onKeyDown={(e) => {
                                                             e.preventDefault();
                                                         }}
                                                     />
                                                 )}
-                                                {...register("startDate", {
+                                                {...register(`employment[${employment.id}].startDate`, {
                                                     required: true,
                                                 })}
                                             />
@@ -164,22 +160,22 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                                         showMonthYearPicker
                                                         autoComplete='off'
                                                         maxDate={today}
-                                                        onChange={(date) => {
-                                                            startEndDate(date)
-                                                            field.onChange(date)
+                                                        onChange={(date: any) => {
+                                                            startEndDate(date);
+                                                            field.onChange(date);
                                                         }}
-                                                        selected={endDate !== "" ? new Date(endDate) : null}
+                                                        selected={employment.endDate !== "" ? new Date(employment.endDate) : null}
                                                         value={endDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
                                                         className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
-                                                        name="dob"
+                                                        name={`endDate_${index}`}
                                                         onKeyDown={(e: any) => {
                                                             e.preventDefault();
                                                         }}
                                                     />
                                                 )}
-                                                {...register("endDate", {
+                                                {...register(`employment[${employment.id}].endDate`, {
                                                     required: true,
                                                 })}
                                             />
@@ -192,8 +188,8 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                                             description
                                         </label>
                                         <textarea
-                                            {...register("description", { required: true })}
-                                            name="description"
+                                            {...register(`employment[${employment.id}].description`, { required: true })}
+                                            name={`employment[${employment.id}].description`}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.description && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="description"
                                             placeholder="description"
@@ -210,10 +206,10 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                         </button>
                     </div>
                     <div className=" flex items-center justify-between ml-7 mb-3">
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Submit
+                        <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Back
                         </button>
-                        <button onClick={() => { setIsNext(true) }} type="button" className={`bg-black text-white font-bold py-2 px-4 rounded`}>
+                        <button type="submit" className={`bg-black text-white font-bold py-2 px-4 rounded`}>
                             Next
                         </button>
                     </div>
