@@ -5,8 +5,8 @@ import axios from "axios";
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
-import AddCategory from "./addCatgory";
 import EducationalDetail from "@/components/personalDetail/educationalDetail/page";
+import EmploymentHistory from "@/components/personalDetail/employmentHistory/page";
 
 function EditProfile() {
     type ProfileValue = {
@@ -96,7 +96,7 @@ function EditProfile() {
                     <div className="flex flex-wrap -mx-3">
                         <div className="flex-none w-full max-w-full px-3">
                             <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                                {isNext ?
+                                {/* {isNext ?
                                     <AddCategory setIsNext={setIsNext} />
                                     :
                                     <div>
@@ -242,8 +242,8 @@ function EditProfile() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>}
-                                    {/* <EducationalDetail setIsNext={setIsNext}/> */}
+                                    </div>} */}
+                                    <EmploymentHistory setIsNext={setIsNext}/>
                             </div>
                         </div>
                     </div>

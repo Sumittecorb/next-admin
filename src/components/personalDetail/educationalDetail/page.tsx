@@ -36,8 +36,8 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
         setEndDate(moment(date).format('MMM YYYY'))
     }
 
-    const onsubmit = () => {
-
+    const onsubmit = (data: any) => {
+        console.log(data, "data");
     }
     const addEducation = () => {
         const currentValues = getValues();
@@ -79,6 +79,7 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                         </label>
                                         <input
                                             type="text"
+                                            autoComplete='off'
                                             {...register("school", { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.school && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="school"
@@ -90,6 +91,7 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                         </label>
                                         <input
                                             type="text"
+                                            autoComplete='off'
                                             {...register("degree", { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.degree && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="name"
@@ -115,7 +117,7 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                                         value={startDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
-                                                        className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
+                                                        className={`focus-visible:outline-none ${errors.startDate && "border-red-500"} w-full bg-gray-200 text-gray-700 border py-3 px-4`}
                                                         name="dob"
                                                         onKeyDown={(e) => {
                                                             e.preventDefault();
@@ -148,7 +150,7 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                                         value={endDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
-                                                        className="focus-visible:outline-none w-full bg-gray-200 text-gray-700 border py-3 px-4  "
+                                                        className={`focus-visible:outline-none w-full ${errors.endDate && "border-red-500"} bg-gray-200 text-gray-700 border py-3 px-4`}
                                                         name="endDate"
                                                         onKeyDown={(e: any) => {
                                                             e.preventDefault();
