@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     categoryValues: Array,
+    employeeDetail: [],
+    educationalDetail: Array,
     isAdmin: {
         type: Boolean,
         default: false
