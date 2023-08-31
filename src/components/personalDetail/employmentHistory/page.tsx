@@ -1,10 +1,12 @@
+import axios from "axios";
 import moment from "moment";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Controller, useForm } from "react-hook-form";
 
-const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
+const EmploymentHistory = ({ setIsNext, isId }: { setIsNext: any, isId: any }) => {
     type ProfileValue = {
         id: number
         title: string
@@ -13,7 +15,8 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
         startDate: string
         endDate: string
     }
-
+    // const searchParams = useSearchParams();
+    // const isId = searchParams.get('_id')
     const { register, control, handleSubmit, getValues, formState: { errors }, trigger } = useForm<ProfileValue>();
     const today = new Date();
     const [startDate, setStartDate] = useState("")
@@ -41,11 +44,6 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
             currentValues.startDate === undefined ||
             currentValues.endDate === undefined
         );
-        
-        console.log(currentValues,"currentValues");
-        
-        console.log(isCurrentEntryEmpty,"isCurrentEntryEmpty");
-        
 
         // if (isCurrentEntryEmpty) {
         //     return;
@@ -72,9 +70,19 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
         setEndDate(moment(date).format('MMM YYYY'))
     }
 
-    const onsubmit = (data: any) => {
+    const onsubmit = async (data: any) => {
         console.log(data.employment);
-        setIsNext(true)
+        let reqBody = {
+            id: isId,
+            employeeDetails: [
+                data.employment
+            ]
+        }
+
+        let res = await axios.put("/api/v1/user/updateUser", reqBody)
+        if (res?.status == 200) {
+            setIsNext(true)
+        }
     }
 
     return (

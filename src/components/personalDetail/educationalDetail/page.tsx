@@ -1,10 +1,11 @@
+import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Controller, useForm } from "react-hook-form";
 
-const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
+const EducationalDetail = ({ setIsNext, isId }: { setIsNext: any, isId: any }) => {
 
     type ProfileValue = {
         id: number
@@ -46,8 +47,20 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
         setEndDate(moment(date).format('MMM YYYY'))
     }
 
-    const onsubmit = (data: any) => {
+    const onsubmit = async (data: any) => {
         console.log(data.employment);
+
+        let reqBody = {
+            id: isId,
+            educationalDetail: [
+                data.employment
+            ]
+        }
+
+        let res = await axios.put("/api/v1/user/updateUser", reqBody)
+        if (res?.status == 200) {
+            setIsNext(true)
+        }
     }
     const addEducation = () => {
         const newId = employmentHistory.length;
