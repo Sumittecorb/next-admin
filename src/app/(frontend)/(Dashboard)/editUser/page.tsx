@@ -243,7 +243,8 @@ function EditProfile() {
                                             </div>
                                         </div>
                                     </div>} */}
-                                    <EmploymentHistory setIsNext={setIsNext}/>
+                                    {/* <EmploymentHistory setIsNext={setIsNext}/> */}
+                                    <EducationalDetail setIsNext={setIsNext}/>
                             </div>
                         </div>
                     </div>

@@ -29,8 +29,6 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
         },
     ]);
 
-    console.log(employmentHistory, "employmentHistory");
-
 
     const addEmployment = async () => {
 
@@ -43,6 +41,11 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
             currentValues.startDate === undefined ||
             currentValues.endDate === undefined
         );
+        
+        console.log(currentValues,"currentValues");
+        
+        console.log(isCurrentEntryEmpty,"isCurrentEntryEmpty");
+        
 
         // if (isCurrentEntryEmpty) {
         //     return;
@@ -59,9 +62,6 @@ const EmploymentHistory = ({ setIsNext }: { setIsNext: any }) => {
                 endDate: "",
             },
         ]);
-        const isFormValid = await trigger();
-        console.log(isFormValid, "isFormValid");
-
     }
 
     const startChangeDate = (date: any) => {

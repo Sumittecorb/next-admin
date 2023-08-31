@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
 
     type ProfileValue = {
+        id: number
         school: string
         degree: string
         description: string;
@@ -20,12 +21,21 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
     const { register, control, handleSubmit, getValues, formState: { errors } } = useForm<ProfileValue>();
     const [employmentHistory, setEmploymentHistory] = useState<ProfileValue[]>([
         {
+            id: 0,
             school: "",
             degree: "",
             description: "",
             startDate: "",
             endDate: ""
         }
+        // {
+        //     id: 0,
+        //     title: "",
+        //     employer: "",
+        //     description: "",
+        //     startDate: "",
+        //     endDate: "",
+        // },
     ]);
 
     const startChangeDate = (date: any) => {
@@ -37,9 +47,10 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
     }
 
     const onsubmit = (data: any) => {
-        console.log(data, "data");
+        console.log(data.employment);
     }
     const addEducation = () => {
+        const newId = employmentHistory.length;
         const currentValues = getValues();
         const isCurrentEntryEmpty = (
             currentValues.school === "" ||
@@ -49,11 +60,12 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
             currentValues.endDate === undefined
         );
 
-        if (isCurrentEntryEmpty) {
-            return;
-        }
+        // if (isCurrentEntryEmpty) {
+        //     return;
+        // }
 
         setEmploymentHistory([...employmentHistory, {
+            id: newId,
             school: "",
             degree: "",
             description: "",
@@ -80,10 +92,11 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                         <input
                                             type="text"
                                             autoComplete='off'
-                                            {...register("school", { required: true })}
+                                            {...register(`employment[${employment.id}].school`, { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.school && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="school"
-                                            name="school" />
+                                            name={`employment[${employment.id}].school`}
+                                        />
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -92,10 +105,11 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                         <input
                                             type="text"
                                             autoComplete='off'
-                                            {...register("degree", { required: true })}
+                                            {...register(`employment[${employment.id}].degree`, { required: true })}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.degree && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
-                                            id="name"
-                                            name="degree" />
+                                            id="degree"
+                                            name={`employment[${employment.id}].degree`}
+                                        />
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -109,22 +123,22 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                                         autoComplete='off'
                                                         showMonthYearPicker
                                                         maxDate={today}
-                                                        onChange={(date) => {
-                                                            startChangeDate(date)
-                                                            field.onChange(date)
+                                                        onChange={(date: any) => {
+                                                            startChangeDate(date);
+                                                            field.onChange(date);
                                                         }}
-                                                        selected={startDate !== "" ? new Date(startDate) : null}
+                                                        selected={employment.startDate !== "" ? new Date(employment.startDate) : null}
                                                         value={startDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
                                                         className={`focus-visible:outline-none ${errors.startDate && "border-red-500"} w-full bg-gray-200 text-gray-700 border py-3 px-4`}
                                                         name="dob"
                                                         onKeyDown={(e) => {
-                                                            e.preventDefault();
+                                                            e.preventDefault()
                                                         }}
                                                     />
                                                 )}
-                                                {...register("startDate", {
+                                                {...register(`employment[${employment.id}].startDate`, {
                                                     required: true,
                                                 })}
                                             />
@@ -142,11 +156,11 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                                         showMonthYearPicker
                                                         autoComplete='off'
                                                         maxDate={today}
-                                                        onChange={(date) => {
-                                                            startEndDate(date)
-                                                            field.onChange(date)
+                                                        onChange={(date: any) => {
+                                                            startEndDate(date);
+                                                            field.onChange(date);
                                                         }}
-                                                        selected={endDate !== "" ? new Date(endDate) : null}
+                                                        selected={employment.endDate !== "" ? new Date(employment.endDate) : null}
                                                         value={endDate}
                                                         placeholderText="MM/YYYY"
                                                         showTimeInput={false}
@@ -157,7 +171,7 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                                         }}
                                                     />
                                                 )}
-                                                {...register("endDate", {
+                                                {...register(`employment[${employment.id}].endDate`, {
                                                     required: true,
                                                 })}
                                             />
@@ -170,8 +184,8 @@ const EducationalDetail = ({ setIsNext }: { setIsNext: any }) => {
                                             description
                                         </label>
                                         <textarea
-                                            {...register("description", { required: true })}
-                                            name="description"
+                                            {...register(`employment[${employment.id}].description`, { required: true })}
+                                            name={`employment[${employment.id}].description`}
                                             className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.description && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                             id="description"
                                             placeholder="description"
