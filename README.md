@@ -1,6 +1,4 @@
 
-
-
 ## Available Scripts
 
 ### To install all the required dependecies
