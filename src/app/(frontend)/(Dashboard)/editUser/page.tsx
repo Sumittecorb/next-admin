@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form"
 import EducationalDetail from "@/components/personalDetail/educationalDetail/page";
 import EmploymentHistory from "@/components/personalDetail/employmentHistory/page";
 import AddCategory from "./addCatgory";
+import SkillList from "@/components/personalDetail/skills/page";
 
 function EditProfile() {
     type ProfileValue = {
@@ -97,7 +98,7 @@ function EditProfile() {
                     <div className="flex flex-wrap -mx-3">
                         <div className="flex-none w-full max-w-full px-3">
                             <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                                {isNext ?
+                                {/* {isNext ?
                                     <AddCategory setIsNext={setIsNext} isId={isId}/>
                                     :
                                     <div>
@@ -243,8 +244,9 @@ function EditProfile() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>}
-                                    {/* <EmploymentHistory setIsNext={setIsNext}/>
+                                    </div>} */}
+                                <SkillList />
+                                {/* <EmploymentHistory setIsNext={setIsNext}/>
                                     <EducationalDetail setIsNext={setIsNext}/> */}
                             </div>
                         </div>
