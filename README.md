@@ -1,9 +1,33 @@
-<h1 align="center">Admin-Panel</h1>
 
-<p align="center">
-  <a href="#Frameworks"><strong>Frameworks</strong></a> ·
-</p>
-<br/>
+
+
+## Available Scripts
+
+### To install all the required dependecies
+
+```
+npm install
+```
+
+
+In the project directory, you can run:
+
+```
+npm start
+````
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+
+
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
 
 ### FrameWork
 
