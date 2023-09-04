@@ -22,3 +22,18 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: error.message })
     }
 }
+
+export async function GET(request: NextRequest) {
+    try {
+        const categoryList = await Category.find()
+        if (categoryList.length == 0) {
+            return NextResponse.json({ error: "No Category Found" }, { status: 404 })
+        }
+        else {
+            return NextResponse.json({ categoryList });
+        }
+    }
+    catch (error: any) {
+        return NextResponse.json({ error: error.message })
+    }
+}

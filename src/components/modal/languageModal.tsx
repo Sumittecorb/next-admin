@@ -25,8 +25,11 @@ function LanguageModal({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: any 
         const keyData = {
             language: inputFieldValues
         }
-        let res = await axios.post("/api/v1/user/addLanguage", keyData)
+        let res = await axios.post("/api/v1/user/language", keyData)
         console.log(res, "res");
+        if (res?.status == 201) {
+            setIsOpen(false)
+        }
     }
 
     return (

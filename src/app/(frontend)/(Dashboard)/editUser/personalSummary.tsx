@@ -7,7 +7,7 @@ import { ProgressDefault } from "@/components/progressBar/page";
 import EducationalDetail from "@/components/personalDetail/educationalDetail/page";
 import EmploymentHistory from "@/components/personalDetail/employmentHistory/page";
 
-function PersonalDetail() {
+function PersonalDetail({ isId }: { isId: any }) {
     type ProfileValue = {
         title: string;
         email: string;
@@ -70,8 +70,8 @@ function PersonalDetail() {
                 <div className="p-0 overflow-x-auto">
                     <div className="w-full max-w-lg">
                         {!isNext ?
-                            <EmploymentHistory setIsNext={setIsNext} /> :
-                            <EducationalDetail />
+                            <EmploymentHistory setIsNext={setIsNext} isId={isId} /> :
+                            <EducationalDetail setIsNext={setIsNext} isId={isId} />
                         }
                     </div>
                 </div>
