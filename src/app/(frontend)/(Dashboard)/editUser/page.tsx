@@ -18,7 +18,8 @@ function EditProfile() {
         menu: boolean,
         description: string,
         shortDescription: string,
-        designation: string
+        designation: string,
+        profile: any
     }
     const searchParams = useSearchParams();
     const [userData, setUserData] = useState<any>();
@@ -98,8 +99,8 @@ function EditProfile() {
                     <div className="flex flex-wrap -mx-3">
                         <div className="flex-none w-full max-w-full px-3">
                             <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                                {/* {isNext ?
-                                    <AddCategory setIsNext={setIsNext} isId={isId}/>
+                                {isNext ?
+                                    <AddCategory setIsNext={setIsNext} isId={isId} />
                                     :
                                     <div>
                                         <ProgressDefault value={2} />
@@ -110,6 +111,15 @@ function EditProfile() {
                                             <div className="p-0 overflow-x-auto">
                                                 <div className="w-full max-w-lg">
                                                     <form onSubmit={handleSubmit(onsubmit)} >
+                                                        <div className="w-full mx-1 px-3 mb-6 md:mb-0 mt-5">
+                                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                                                                Upload profile picture
+                                                            </label>
+                                                            <input
+                                                                type="file"
+                                                                {...register("profile", { required: true })}
+                                                            />
+                                                        </div>
                                                         <div className="w-full mx-1 px-3 mb-6 md:mb-0 mt-5">
                                                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                                                                 Title
@@ -158,7 +168,8 @@ function EditProfile() {
                                                                     name="description"
                                                                     className={`appearance-none block w-full bg-gray-200 text-gray-700 border ${errors.description && "border-red-500"}  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
                                                                     id="description"
-                                                                    placeholder="description" />
+                                                                    placeholder="description"
+                                                                />
                                                             </div>
                                                         </div>
                                                         <div className="w-full mx-1 px-3 mb-6 md:mb-0">
@@ -244,8 +255,8 @@ function EditProfile() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>} */}
-                                <SkillList />
+                                    </div>}
+                                {/* <SkillList /> */}
                                 {/* <EmploymentHistory setIsNext={setIsNext}/>
                                     <EducationalDetail setIsNext={setIsNext}/> */}
                             </div>

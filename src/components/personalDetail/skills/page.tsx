@@ -1,10 +1,10 @@
-import { SetStateAction, JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, useState } from "react";
+import { useState } from "react";
 
 const SkillList = () => {
     const [inputValue, setInputValue] = useState('');
     const [valueArrays, setValueArrays] = useState<any>({});
 
-    const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    const handleInputChange = (event: any) => {
         setInputValue(event.target.value);
     };
 
@@ -16,9 +16,8 @@ const SkillList = () => {
             if (!valueArrays[value]) {
                 valueArrays[value] = [];
             }
-
             valueArrays[value].push(value);
-            setValueArrays({ ...valueArrays });
+            setValueArrays({ ...valueArrays }); 
         }
     };
 
