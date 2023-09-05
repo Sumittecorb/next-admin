@@ -1,11 +1,55 @@
-<h1 align="center">Admin-Panel</h1>
+# Frontend Development
 
-<p align="center">
-  <a href="#Frameworks"><strong>Frameworks</strong></a> ·
-</p>
-<br/>
+* [Setup Environment](#setup-environment)
+* [Available Scripts](#available-scripts)
+  - [Install Dependencies](#install-dependencies)
+  - [Run Project](#run-project)
 
-### FrameWork
+
+
+## Setup Environment
+
+In the project directory, create .env in the root directory and pass the for these three fields
+
+```bash
+REACT_APP_USER_NAME=
+REACT_APP_PASSWORD=
+REACT_APP_BACKEND_URL=
+```
+
+## Available Scripts
+
+### Install Dependencies
+
+To install all the required dependencies
+
+```bash
+npm install
+```
+
+### Run Project
+
+In the project directory, you can run:
+
+```bash
+npm start
+````
+
+Runs the app in the development mode.
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+
+
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+### Dependencies
 
 [Next.js](https://nextjs.org/) – React framework for building performant apps with the best developer experience.
 
@@ -25,5 +69,5 @@
 
 ### Code Quality
 
-- [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end typesafety
-- [ESLint](https://eslint.org/) – Pluggable linter for Next.js and TypeScript
+- [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end type-safety
+- [ESLint](https://eslint.org/) – Pluggable linter for Reactjs and TypeScript
