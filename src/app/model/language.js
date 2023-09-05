@@ -16,11 +16,13 @@ const languageSchema = new mongoose.Schema({
     },
     isActive: {
         type: Boolean,
-        default: true
+        default: true,
+        select:false
     },
     isDelete: {
         type: Boolean,
-        default: false
+        default: false,
+        select:false
     },
 })
 const Language = mongoose.models.language || mongoose.model("language", languageSchema);

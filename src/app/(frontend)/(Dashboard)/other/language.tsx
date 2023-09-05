@@ -12,7 +12,7 @@ function Language() {
     }, [])
 
     const languageList = async () => {
-        let res = await axios.get("/api/v1/user/getLanguage")
+        let res = await axios.get("/api/v1/user/language")
         if (res?.status == 200) {
             setIsLanguage(res?.data?.languageList)
         }
