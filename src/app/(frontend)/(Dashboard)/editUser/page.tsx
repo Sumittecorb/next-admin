@@ -71,6 +71,7 @@ function EditProfile() {
     };
 
     const handleUpload = async () => {
+        console.log(selectedImage,"selectedImage");
         const formData = new FormData();
         formData.append('image', selectedImage);
 
@@ -94,7 +95,6 @@ function EditProfile() {
 
     const onsubmit = async (data: any) => {
         console.log(data, "data");
-
         // if (!isDesignation) {
         //     setIsErr(true)
         // }
