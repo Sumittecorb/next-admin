@@ -19,13 +19,14 @@ function EditProfile() {
         description: string,
         shortDescription: string,
         designation: string,
-        profile: any
+
     }
     const searchParams = useSearchParams();
     const [userData, setUserData] = useState<any>();
     const { setValue, register, handleSubmit, formState: { errors } } = useForm<ProfileValue>();
     const [isDesignation, setIsDesignation] = useState("");
     const [isErr, setIsErr] = useState(false)
+    const [selectedImage, setSelectedImage] = useState<any>(null);
     const [menuSelection, setMenuSelection] = useState<boolean>(userData?.menu);
     const [isNext, setIsNext] = useState(false)
 
@@ -64,28 +65,57 @@ function EditProfile() {
         setIsErr(false)
     };
 
+    const handleImageChange = (e: any) => {
+        const file = e.target.files[0];
+        setSelectedImage(file);
+    };
+
+    const handleUpload = async () => {
+        console.log(selectedImage,"selectedImage");
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+
+        try {
+            const response = await fetch('/api/v1/user/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                console.log('Image uploaded successfully.');
+                // Handle success as needed.
+            } else {
+                console.error('Image upload failed.');
+                // Handle error as needed.
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     const onsubmit = async (data: any) => {
-        if (!isDesignation) {
-            setIsErr(true)
-        }
-        else {
-            let keyData = {
-                id: isId,
-                title: data.title,
-                name: data.name,
-                email: data.email,
-                description: data.description,
-                designation: isDesignation,
-                shortDescription: data.shortDescription,
-                menu: menuSelection
-            }
-            try {
-                const response = await axios.put("/api/v1/user/updateUser", keyData)
-                router.push("/users")
-            } catch (error: any) {
-                console.log(error.message, "error")
-            }
-        }
+        console.log(data, "data");
+        // if (!isDesignation) {
+        //     setIsErr(true)
+        // }
+        // else {
+        //     let keyData = {
+        //         id: isId,
+        //         title: data.title,
+        //         name: data.name,
+        //         email: data.email,
+        //         description: data.description,
+        //         designation: isDesignation,
+        //         shortDescription: data.shortDescription,
+        //         menu: menuSelection
+        //     }
+        //     try {
+        //         // const response = await axios.put("/api/v1/user/updateUser", keyData)
+        //         router.push("/users")
+        //     } catch (error: any) {
+        //         console.log(error.message, "error")
+        //     }
+        // }
     };
 
     const handleNext = () => {
@@ -117,9 +147,19 @@ function EditProfile() {
                                                             </label>
                                                             <input
                                                                 type="file"
+
+                                                                accept=".png, .jpg, .jpeg"
+                                                                onChange={handleImageChange}
+                                                                // {...register("image", { required: true })}
+                                                                name="image"
+                                                            />
+                                                        </div>
+                                                        <button type="button" onClick={handleUpload}>Upload Image</button>
+
                                                                 {...register("profile", { required: true })}
                                                             />
                                                         </div>
+
                                                         <div className="w-full mx-1 px-3 mb-6 md:mb-0 mt-5">
                                                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                                                                 Title
