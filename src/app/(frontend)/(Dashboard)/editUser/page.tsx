@@ -20,7 +20,7 @@ function EditProfile() {
         description: string,
         shortDescription: string,
         designation: string,
-        image: any
+
     }
     const searchParams = useSearchParams();
     const [userData, setUserData] = useState<any>();
@@ -148,6 +148,7 @@ function EditProfile() {
                                                             </label>
                                                             <input
                                                                 type="file"
+
                                                                 accept=".png, .jpg, .jpeg"
                                                                 onChange={handleImageChange}
                                                                 // {...register("image", { required: true })}
@@ -155,6 +156,11 @@ function EditProfile() {
                                                             />
                                                         </div>
                                                         <button type="button" onClick={handleUpload}>Upload Image</button>
+
+                                                                {...register("profile", { required: true })}
+                                                            />
+                                                        </div>
+
                                                         <div className="w-full mx-1 px-3 mb-6 md:mb-0 mt-5">
                                                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                                                                 Title
